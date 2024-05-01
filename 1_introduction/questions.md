@@ -2,11 +2,11 @@
 
 What is the difference between a class and an object?
 
-___
 
 Answer:
 
-___
+A class is a template where objects are created, so it is a group of objects with similar features. 
+Meanwhile, an object is a real-world entity that belongs to a class.
 
 # Question 2
 
@@ -77,4 +77,11 @@ ___
 
 Answer:
 
-___
+Bert \
+Gerry \
+Bert \
+James \
+When we call modifyPerson 1, we pass as parameter person1 ("John"), it then sets the name to "Bert", so person1.name is Bert and it returns the person so modifiedPerson1.name also becomes "Bert". \
+When we call  modifyPerson2, we pass as parameter person2 ("Bob"), it then sets the name to "Gerry", so person2.name is Gerry. Then it creates a new person whose name is James and returns it, thereby setting modifyPerson1 to "James".
+
+
