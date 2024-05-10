@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg;
 
+/**
+ * Attackable interface.
+ */
 public interface Attackable {
-    public void attack(Character character);
+    void attack(Character character);
 }

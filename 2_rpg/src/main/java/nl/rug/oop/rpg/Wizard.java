@@ -1,7 +1,17 @@
 package nl.rug.oop.rpg;
 
+/**
+ * The Wizard NPC subclass.
+ */
 public class Wizard extends NPC implements Interactable {
 
+    /**
+     * New Wizard.
+     * @param description the description of the wizard.
+     * @param damage the damage the wizard can inflict.
+     * @param health the life of the wizard.
+     * @param money the money it has.
+     */
     public Wizard(String description, int damage, int health, int money) {
         super(description, damage, health, money);
     }

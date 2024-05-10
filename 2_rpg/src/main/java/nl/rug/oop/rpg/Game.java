@@ -2,8 +2,15 @@ package nl.rug.oop.rpg;
 
 import java.util.Scanner;
 
-public class Game {
+/**
+ * The Game class.
+ */
 
+public class Game {
+    /**
+     * Play a game.
+     * @param player is the player that plays the game.
+     */
     public void play(Player player) {
         Scanner scanner = new Scanner(System.in);
         while (player.getHealth() > 0) {

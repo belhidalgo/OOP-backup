@@ -5,16 +5,23 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  * The room class.
  */
+
 @Setter
 @Getter
+
 public class Room implements Inspectable {
     private String description;
     private List<Door> doors;
     private List<NPC> NPCs;
 
+    /**
+     * New room.
+     * @param description description of the room.
+     */
     public Room(String description) {
         this.description = description;
         doors = new ArrayList<>();
@@ -35,7 +42,7 @@ public class Room implements Inspectable {
     }
 
     /**
-     * Lists the description of each door in order
+     * Lists the description of each door in order.
      */
     public void listDoors(){
         for (int i=0; i<doors.size(); i++) {
@@ -43,6 +50,9 @@ public class Room implements Inspectable {
         }
     }
 
+    /**
+     * Lists the description of each NPC in order.
+     */
     public void listNPCs() {
         for (int i=0; i<NPCs.size(); i++) {
             System.out.print("    ("+ i +") ");
@@ -50,6 +60,11 @@ public class Room implements Inspectable {
         }
     }
 
+    /**
+     * Cross the door chosen.
+     * @param option the option chosen.
+     * @param player the player that chooses the option.
+     */
     public void chooseDoor(int option, Player player) {
         if (option == -1) {
             System.out.println("You stay here");
@@ -61,6 +76,11 @@ public class Room implements Inspectable {
         }
     }
 
+    /**
+     * Interact with the chosen NPC.
+     * @param option the option chosen.
+     * @param player the player that chooses.
+     */
     public void chooseNPC(int option, Player player) {
         if (option == -1) {
             System.out.println("You do nothing");

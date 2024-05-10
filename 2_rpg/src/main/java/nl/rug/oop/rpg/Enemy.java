@@ -2,8 +2,20 @@ package nl.rug.oop.rpg;
 
 import java.util.Scanner;
 
+/**
+ * Enemy class.
+ * Subclass of NPC.
+ */
+
 public class Enemy extends NPC implements Attackable, Interactable {
 
+    /**
+     * Create a new enemy.
+     * @param description the description of the enemy.
+     * @param damage the damage the enemy can inflict.
+     * @param health the life of the enemy.
+     * @param money the money it has.
+     */
     public Enemy(String description, int damage, int health, int money) {
         super(description, damage, health, money);
     }
@@ -21,6 +33,10 @@ public class Enemy extends NPC implements Attackable, Interactable {
         System.out.println(description);
     }
 
+    /**
+     * Method to interact with a player.
+     * @param player is the player with whom an Enemy interacts.
+     */
     @Override
     public void interact(Player player) {
         Scanner scanner = new Scanner(System.in);

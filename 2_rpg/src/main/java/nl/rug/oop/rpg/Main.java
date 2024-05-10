@@ -1,6 +1,13 @@
 package nl.rug.oop.rpg;
 
+/**
+ * The main class.
+ */
 public class Main {
+    /**
+     * The main function.
+     * @param args the arguments passed on to the main function.
+     */
     public static void main(String[] args) {
         Room room2 = new Room("A magically sparkling room with gold lights.");
         Room room3 = new Room("A pitch black space.");
