@@ -1,5 +1,11 @@
 package nl.rug.oop.rpg;
 
+import nl.rug.oop.rpg.characters.*;
+import nl.rug.oop.rpg.characters.NPCs.*;
+import nl.rug.oop.rpg.doors.Door;
+import nl.rug.oop.rpg.doors.Evil;
+import nl.rug.oop.rpg.doors.Trap;
+
 /**
  * The main class.
  */
@@ -11,8 +17,8 @@ public class Main {
     public static void main(String[] args) {
         Room room2 = new Room("A magically sparkling room with gold lights.");
         Room room3 = new Room("A pitch black space.");
-        Door door = new Door("A black door with a crack", room2);
-        Door door2 = new Door("A mysterious red door", room3);
+        Door door = new Evil("A black door with a crack", room2, 1, 3);
+        Door door2 = new Trap("A mysterious red door", room3, 2);
         Room room1 = new Room("A rather dusty room full of computers.");
         room1.addDoor(door);
         room1.addDoor(door2);

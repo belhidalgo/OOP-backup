@@ -1,7 +1,9 @@
 package nl.rug.oop.rpg;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import nl.rug.oop.rpg.characters.NPCs.NPC;
+import nl.rug.oop.rpg.characters.Player;
+import nl.rug.oop.rpg.doors.Door;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 @Setter
 @Getter
-
+@NoArgsConstructor
 public class Room implements Inspectable {
     private String description;
     private List<Door> doors;
@@ -71,8 +73,10 @@ public class Room implements Inspectable {
         } else if (doors.size() <= option || option < 0) {
             System.out.println("You gave an invalid number");
         } else {
-            System.out.println("You go through the door");
             doors.get(option).interact(player);
+            if (player.getHealth() > 0) {
+                System.out.println("You go through the door");
+            }
         }
     }
 

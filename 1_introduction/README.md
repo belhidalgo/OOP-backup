@@ -230,7 +230,7 @@ If you don't know how to fix a checkstyle error, make sure to read the documenta
 
 | Performed Check  | Notes |
 | ------------- | ------------- |
-| [LineLength](https://checkstyle.sourceforge.io/config_sizes.html#LineLength) | Lines cannot be longer than 120 characters |
+| [LineLength](https://checkstyle.sourceforge.io/config_sizes.html#LineLength) | Lines cannot be longer than 120 nl.rug.oop.rpg.characters |
 | [FileLength](https://checkstyle.sourceforge.io/config_sizes.html#FileLength) | Files cannot be longer than 600 lines. Note that this is the bare minimum. You should strive for 300-400 at most. Also note that this includes Javadoc. Without Javadoc, strive for at most 200.|
 
 ## Code Quality

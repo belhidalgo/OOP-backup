@@ -1,7 +1,9 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.characters.NPCs;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import nl.rug.oop.rpg.Inspectable;
+import nl.rug.oop.rpg.Interactable;
+import nl.rug.oop.rpg.characters.Character;
 
 /**
  * The superclass NPC, subclass of Character.

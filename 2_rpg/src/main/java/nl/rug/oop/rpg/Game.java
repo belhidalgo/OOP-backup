@@ -1,10 +1,14 @@
 package nl.rug.oop.rpg;
 
 import java.util.Scanner;
+import lombok.*;
+import nl.rug.oop.rpg.characters.Player;
 
 /**
  * The Game class.
  */
+
+@NoArgsConstructor
 
 public class Game {
     /**
@@ -18,6 +22,7 @@ public class Game {
             System.out.println("    (0) Look around");
             System.out.println("    (1) Look for a way out");
             System.out.println("    (2) Look for company");
+            System.out.println("    (3) See my energy levels");
             int option = scanner.nextInt();
             switch (option) {
                 case 0:
@@ -42,6 +47,10 @@ public class Game {
                     System.out.println("Interact? (-1 : do nothing)");
                     int npc = scanner.nextInt();
                     player.getRoom().chooseNPC(npc, player);
+                    break;
+                case 3:
+                    player.printStatus();
+                    break;
 
             }
         }

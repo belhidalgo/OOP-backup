@@ -1,4 +1,7 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.characters.NPCs;
+
+import nl.rug.oop.rpg.Interactable;
+import nl.rug.oop.rpg.characters.Player;
 
 import java.util.Random;
 import java.util.Scanner;

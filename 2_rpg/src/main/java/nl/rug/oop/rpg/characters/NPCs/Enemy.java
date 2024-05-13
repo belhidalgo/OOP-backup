@@ -1,4 +1,9 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.characters.NPCs;
+
+import nl.rug.oop.rpg.Interactable;
+import nl.rug.oop.rpg.Attackable;
+import nl.rug.oop.rpg.characters.Character;
+import nl.rug.oop.rpg.characters.Player;
 
 import java.util.Scanner;
 
@@ -6,7 +11,6 @@ import java.util.Scanner;
  * Enemy class.
  * Subclass of NPC.
  */
-
 public class Enemy extends NPC implements Attackable, Interactable {
 
     /**

@@ -1,7 +1,8 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.characters;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import nl.rug.oop.rpg.Attackable;
+import nl.rug.oop.rpg.Room;
 
 /**
  * The player class.
@@ -9,7 +10,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class Player extends Character implements Attackable {
     /**
      * Implement a player.
@@ -40,7 +40,7 @@ public class Player extends Character implements Attackable {
 
     @Override
     public void attack(Character target) {
-        target.setHealth(target.getHealth() - getDamage());
+        target.setHealth(target.getHealth() - damage);
     }
 
     /**

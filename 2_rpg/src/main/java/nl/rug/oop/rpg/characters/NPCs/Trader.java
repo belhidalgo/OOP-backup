@@ -1,4 +1,7 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.characters.NPCs;
+
+import nl.rug.oop.rpg.Interactable;
+import nl.rug.oop.rpg.characters.Player;
 
 import java.util.Scanner;
 
@@ -6,7 +9,7 @@ import java.util.Scanner;
  * The Trader NPC subclass.
  */
 
-public class Trader extends NPC implements Interactable{
+public class Trader extends NPC implements Interactable {
     /**
      * New Trader.
      * @param description the description of the trader.
