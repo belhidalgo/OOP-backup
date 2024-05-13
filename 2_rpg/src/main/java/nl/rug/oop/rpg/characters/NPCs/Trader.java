@@ -3,13 +3,19 @@ package nl.rug.oop.rpg.characters.NPCs;
 import nl.rug.oop.rpg.Interactable;
 import nl.rug.oop.rpg.characters.Player;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * The Trader NPC subclass.
  */
 
-public class Trader extends NPC implements Interactable {
+public class Trader extends NPC implements Interactable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 700;
+
     /**
      * New Trader.
      * @param description the description of the trader.

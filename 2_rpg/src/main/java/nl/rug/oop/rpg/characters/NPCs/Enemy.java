@@ -5,13 +5,18 @@ import nl.rug.oop.rpg.Attackable;
 import nl.rug.oop.rpg.characters.Character;
 import nl.rug.oop.rpg.characters.Player;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * Enemy class.
  * Subclass of NPC.
  */
-public class Enemy extends NPC implements Attackable, Interactable {
+public class Enemy extends NPC implements Attackable, Interactable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 500;
 
     /**
      * Create a new enemy.

@@ -5,6 +5,8 @@ import nl.rug.oop.rpg.characters.NPCs.NPC;
 import nl.rug.oop.rpg.characters.Player;
 import nl.rug.oop.rpg.doors.Door;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,10 +17,12 @@ import java.util.ArrayList;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Room implements Inspectable {
+public class Room implements Inspectable, Serializable {
     private String description;
     private List<Door> doors;
     private List<NPC> NPCs;
+    @Serial
+    private static final long serialVersionUID = 400;
 
     /**
      * New room.

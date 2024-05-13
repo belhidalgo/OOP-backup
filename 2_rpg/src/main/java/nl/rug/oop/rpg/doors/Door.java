@@ -6,6 +6,9 @@ import nl.rug.oop.rpg.Interactable;
 import nl.rug.oop.rpg.Room;
 import nl.rug.oop.rpg.characters.Player;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * Class Door.
  */
@@ -14,9 +17,11 @@ import nl.rug.oop.rpg.characters.Player;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Door implements Inspectable, Interactable {
+public class Door implements Inspectable, Interactable, Serializable {
     private String description;
     private Room roomBehind;
+    @Serial
+    private static final long serialVersionUID = 200;
 
     @Override
     public void inspect() {

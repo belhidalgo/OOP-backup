@@ -4,19 +4,25 @@ import lombok.*;
 import nl.rug.oop.rpg.Attackable;
 import nl.rug.oop.rpg.Room;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * The player class.
  */
 
 @Getter
 @Setter
-public class Player extends Character implements Attackable {
+
+public class Player extends Character implements Attackable, Serializable {
     /**
      * Implement a player.
      */
     private String name;
     private Room room;
     private int protection;
+    @Serial
+    private static final long serialVersionUID = 100;
 
     /**
      * New Player.

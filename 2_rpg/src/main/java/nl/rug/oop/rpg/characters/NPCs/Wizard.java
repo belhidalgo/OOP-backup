@@ -3,10 +3,16 @@ package nl.rug.oop.rpg.characters.NPCs;
 import nl.rug.oop.rpg.Interactable;
 import nl.rug.oop.rpg.characters.Player;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * The Wizard NPC subclass.
  */
-public class Wizard extends NPC implements Interactable {
+public class Wizard extends NPC implements Interactable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 800;
 
     /**
      * New Wizard.

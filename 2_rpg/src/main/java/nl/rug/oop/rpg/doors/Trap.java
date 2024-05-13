@@ -4,11 +4,16 @@ import nl.rug.oop.rpg.Interactable;
 import nl.rug.oop.rpg.Room;
 import nl.rug.oop.rpg.characters.Player;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * A trap door (subclass of door) that attacks the player.
  */
-public class Trap extends Door implements Interactable {
+public class Trap extends Door implements Interactable, Serializable {
     private int damage;
+    @Serial
+    private static final long serialVersionUID = 1;
 
     /**
      * We create a new Evil Door.

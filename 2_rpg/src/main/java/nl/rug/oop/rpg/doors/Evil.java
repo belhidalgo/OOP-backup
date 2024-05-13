@@ -5,6 +5,9 @@ import nl.rug.oop.rpg.Interactable;
 import nl.rug.oop.rpg.Room;
 import nl.rug.oop.rpg.characters.Character;
 import nl.rug.oop.rpg.characters.Player;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 
 import lombok.*;
@@ -14,9 +17,11 @@ import lombok.*;
  */
 @Getter
 @Setter
-public class Evil extends Door implements Interactable, Attackable {
+public class Evil extends Door implements Interactable, Attackable, Serializable {
     private int damage;
     private int health;
+    @Serial
+    private static final long serialVersionUID = 300;
 
     /**
      * We create a new Evil Door.

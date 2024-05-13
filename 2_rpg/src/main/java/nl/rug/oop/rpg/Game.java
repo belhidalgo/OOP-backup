@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 import lombok.*;
 import nl.rug.oop.rpg.characters.Player;
@@ -10,7 +12,11 @@ import nl.rug.oop.rpg.characters.Player;
 
 @NoArgsConstructor
 
-public class Game {
+public class Game implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1000;
+
     /**
      * Play a game.
      * @param player is the player that plays the game.
