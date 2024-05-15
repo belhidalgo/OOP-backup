@@ -6,6 +6,7 @@ import nl.rug.oop.rpg.Room;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Scanner;
 
 /**
  * The player class.
@@ -56,5 +57,22 @@ public class Player extends Character implements Attackable, Serializable {
         System.out.println("Damage level: " + damage);
         System.out.println("Health level: " + health);
         System.out.println("Wealth: " + money);
+    }
+
+    /**
+     * Player has decided to look for company.
+     */
+    public void lookForCompany() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("You look if there’s someone here.");
+        if (room.getNPCs().isEmpty()) {
+            System.out.println("You have no company.");
+            return;
+        }
+        System.out.print(" You see:");
+        room.listNPCs();
+        System.out.println("Interact? (-1 : do nothing)");
+        int npc = scanner.nextInt();
+        room.chooseNPC(npc, this);
     }
 }

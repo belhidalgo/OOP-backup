@@ -2,6 +2,9 @@ package nl.rug.oop.rpg.characters;
 
 import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * superclass Character.
  */
@@ -11,7 +14,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Character {
+public abstract class Character implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1100;
     /**
     * The damage it can inflict.
     */

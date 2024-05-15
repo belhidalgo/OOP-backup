@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg;
 
-import nl.rug.oop.rpg.characters.*;
+import nl.rug.oop.rpg.characters.Player;
 import nl.rug.oop.rpg.characters.NPCs.*;
 import nl.rug.oop.rpg.doors.Door;
 import nl.rug.oop.rpg.doors.Evil;
@@ -15,6 +15,7 @@ public class Main {
      * @param args the arguments passed on to the main function.
      */
     public static void main(String[] args) {
+
         Room room2 = new Room("A magically sparkling room with gold lights.");
         Room room3 = new Room("A pitch black space.");
         Door door = new Evil("A black door with a crack", room2, 1, 3);
