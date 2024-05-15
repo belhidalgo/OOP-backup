@@ -29,6 +29,9 @@ public class Game implements Serializable {
             System.out.println("    (1) Look for a way out");
             System.out.println("    (2) Look for company");
             System.out.println("    (3) See my energy levels");
+            System.out.println("    (4) QuickSave");
+            System.out.println("    (5) QuickLoad");
+
             int option = scanner.nextInt();
             switch (option) {
                 case 0:
@@ -57,7 +60,10 @@ public class Game implements Serializable {
                 case 3:
                     player.printStatus();
                     break;
-
+                case 4:
+                    break;
+                case 5:
+                    break;
             }
         }
     }
