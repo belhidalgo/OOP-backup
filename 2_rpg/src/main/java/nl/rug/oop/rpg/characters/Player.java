@@ -47,32 +47,60 @@ public class Player extends Character implements Attackable, Serializable {
 
     @Override
     public void attack(Character target) {
-        target.setHealth(target.getHealth() - damage);
+        target.setHealth(target.getHealth() - strength);
     }
 
     /**
      * Print the current damage, health and money.
      */
     public void printStatus() {
-        System.out.println("Damage level: " + damage);
+        System.out.println("Strength level: " + strength);
         System.out.println("Health level: " + health);
         System.out.println("Wealth: " + money);
     }
 
     /**
      * Player has decided to look for company.
+     * @param scanner scans the option of the user.
      */
-    public void lookForCompany() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("You look if there’s someone here.");
-        if (room.getNPCs().isEmpty()) {
-            System.out.println("You have no company.");
-            return;
+    public void lookForCompany(Scanner scanner) {
+        while (true) {
+            System.out.println("You look if there’s someone here.");
+            if (room.getNPCs().isEmpty()) {
+                System.out.println("You have no company.");
+                return;
+            }
+            System.out.print(" You see:");
+            room.listNPCs();
+            System.out.println("Interact? (-1 : do nothing)");
+            int npc = scanner.nextInt();
+            if (npc >= -1 && npc < room.getNPCs().size()) {
+                room.chooseNPC(npc, this);
+                break;
+            } else {
+                System.out.println("You gave an invalid number. Try again.");
+            }
         }
-        System.out.print(" You see:");
-        room.listNPCs();
-        System.out.println("Interact? (-1 : do nothing)");
-        int npc = scanner.nextInt();
-        room.chooseNPC(npc, this);
+
+    }
+
+    /**
+     * Player searches for a way out - descriptions of the doors in current room
+     * are listed and player chooses which one to go through.
+     * @param scanner - scans the chosen option of the user.
+     */
+    public void wayOut(Scanner scanner) {
+        while (true) {
+            System.out.println("You look around for doors. You see:");
+            room.listDoors();
+            System.out.println("Which door do you take? (-1 : stay here)");
+            int doorOption = scanner.nextInt();
+            if (doorOption >= -1 && doorOption < room.getDoors().size()) {
+                room.chooseDoor(doorOption, this);
+                break;
+            } else {
+                System.out.println("You gave an invalid number. Try again.");
+            }
+        }
     }
 }

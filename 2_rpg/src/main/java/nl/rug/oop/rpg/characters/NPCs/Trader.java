@@ -36,7 +36,7 @@ public class Trader extends NPC implements Interactable, Serializable {
      * Player chose the pretty nice jeans.
      * @param player is the player who chose the option.
      */
-    public void option1(Player player) {
+    public void optionJeans(Player player) {
         if (player.getMoney() >= 50) {
             player.setProtection(player.getProtection() + 1);
             player.setMoney(player.getMoney() - 50);
@@ -50,11 +50,12 @@ public class Trader extends NPC implements Interactable, Serializable {
      * Player chose the rusty sword.
      * @param player is the player who made the choice.
      */
-    public void option2(Player player) {
+    public void optionSword(Player player) {
         if (player.getMoney() >= 150) {
-            player.setDamage(player.getDamage() + 2);
+            player.setStrength(player.getStrength() + 2);
             player.setMoney(player.getMoney() - 150);
-            System.out.println("Damage level: " + player.getDamage());
+            System.out.println("+2 Strength");
+            System.out.println("Strength level: " + player.getStrength());
         } else {
             System.out.println("You're too broke for this.");
         }
@@ -64,7 +65,7 @@ public class Trader extends NPC implements Interactable, Serializable {
      * Player chose the purple fluid.
      * @param player is the player who made the choice.
      */
-    public void option3(Player player) {
+    public void optionFluid(Player player) {
         if (player.getMoney() >= 250) {
             player.setHealth(player.getHealth() + 3);
             player.setMoney(player.getMoney() - 250);
@@ -90,13 +91,13 @@ public class Trader extends NPC implements Interactable, Serializable {
                 System.out.println("<3 <3 <3 <3 <3 <3");
                 break;
             case 1:
-                option1(player);
+                optionJeans(player);
                 break;
             case 2:
-                option2(player);
+                optionSword(player);
                 break;
             case 3:
-                option3(player);
+                optionFluid(player);
                 break;
             default:
                 System.out.println("Invalid choice");

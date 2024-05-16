@@ -40,7 +40,7 @@ public class Healer extends NPC implements Interactable, Serializable {
         Random random = new Random();
         if (random.nextBoolean()) {
             System.out.println("The healer feels generous today and appreciates your kind gesture");
-            player.setHealth(player.getHealth() + damage);
+            player.setHealth(player.getHealth() + strength);
             System.out.println("Health level: "+ player.getHealth());
         } else {
             System.out.println("Tough luck, the healer doesn't appreciate your kind gesture");
@@ -61,7 +61,7 @@ public class Healer extends NPC implements Interactable, Serializable {
             System.out.println("Invalid choice. Try again another time!");
         } else {
             System.out.println("Tempting offer...");
-            player.setHealth(player.getHealth() + damage);
+            player.setHealth(player.getHealth() + strength);
             player.setMoney(player.getMoney() - offer);
             player.printStatus();
         }
@@ -75,14 +75,14 @@ public class Healer extends NPC implements Interactable, Serializable {
         System.out.println("How much of your damage level are you offering?");
         Scanner scanner = new Scanner(System.in);
         int damLevel = scanner.nextInt();
-        if (damLevel < (player.getDamage() * 0.2)) {
+        if (damLevel < (player.getStrength() * 0.2)) {
             System.out.println("Incredibly disappointing offer...");
-        } else if (damLevel <= 0 || damLevel > player.getDamage()) {
+        } else if (damLevel <= 0 || damLevel > player.getStrength()) {
             System.out.println("Invalid choice. Try again another time!");
         } else {
             System.out.println("Tempting offer...");
-            player.setHealth(player.getHealth() + damage);
-            player.setDamage(player.getDamage() - damLevel);
+            player.setHealth(player.getHealth() + strength);
+            player.setStrength(player.getStrength() - damLevel);
             player.printStatus();
         }
     }

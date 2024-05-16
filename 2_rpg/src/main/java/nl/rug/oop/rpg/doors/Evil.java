@@ -72,7 +72,7 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
             }
         }
         while (player.getHealth() > 0 && health > 0) {
-            setHealth(health - player.getDamage());
+            setHealth(health - player.getStrength());
             if (health <= 0) {
                 status(player);
                 return;

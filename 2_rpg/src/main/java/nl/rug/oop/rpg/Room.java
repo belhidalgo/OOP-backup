@@ -74,8 +74,6 @@ public class Room implements Inspectable, Serializable {
     public void chooseDoor(int option, Player player) {
         if (option == -1) {
             System.out.println("You stay here");
-        } else if (doors.size() <= option || option < 0) {
-            System.out.println("You gave an invalid number");
         } else {
             doors.get(option).interact(player);
             if (player.getHealth() > 0) {
@@ -92,8 +90,6 @@ public class Room implements Inspectable, Serializable {
     public void chooseNPC(int option, Player player) {
         if (option == -1) {
             System.out.println("You do nothing");
-        } else if (NPCs.size() <= option || option < 0) {
-            System.out.println("You gave an invalid number");
         } else {
             NPCs.get(option).interact(player);
             if (NPCs.get(option).getHealth() <= 0) {

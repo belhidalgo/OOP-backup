@@ -31,7 +31,7 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
 
     @Override
     public void attack(Character player) {
-        player.setHealth(player.getHealth() - getDamage());
+        player.setHealth(player.getHealth() - getStrength());
         if (player.getHealth() <= 0) {
             System.out.println("Game over!");
         }
