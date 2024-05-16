@@ -32,6 +32,23 @@ public class Game implements Serializable {
     }
 
     /**
+     * Ask the player to provide a fileName.
+     * @param scanner scans the name of the file.
+     * @param directory is the directory where we want to save our file.
+     */
+    public void askFileName(Scanner scanner, File directory, Files files){
+        System.out.println("Filename:");
+        String filename = scanner.next();
+        while (!files.checkFileName(filename, directory)) {
+            System.out.println("Invalid filename. Try again.");
+            System.out.println("Filename:");
+            filename = scanner.next();
+        }
+        files.save(filename, directory);
+        System.out.println("Save successful.");
+    }
+
+    /**
      * Play a game.
      * @param player is the player that plays the game.
      */
@@ -46,7 +63,7 @@ public class Game implements Serializable {
             int option = scanner.nextInt();
             switch (option) {
                 case 0:
-                    System.out.print("You see: ");
+                    System.out.println("You see: ");
                     player.lookAround();
                     break;
                 case 1:
@@ -65,7 +82,10 @@ public class Game implements Serializable {
                     files.quickLoadFromFile();
                     break;
                 case 6:
-                    files.askFileName(scanner, saveDirectory);
+                    askFileName(scanner, saveDirectory, new Files());
+                    break;
+                case 7:
+                    files.scanLoadFile(scanner, saveDirectory);
                     break;
                 default:
                     System.out.println("Invalid option. Try again.");

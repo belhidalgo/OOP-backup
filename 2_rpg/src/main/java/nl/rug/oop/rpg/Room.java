@@ -44,7 +44,7 @@ public class Room implements Inspectable, Serializable {
 
     @Override
     public void inspect() {
-        System.out.println(description + " The room has"+ doors.size() + " doors.");
+        System.out.println(description + " The room has "+ doors.size() + " doors.");
     }
 
     /**

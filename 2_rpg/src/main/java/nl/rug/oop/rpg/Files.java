@@ -16,9 +16,11 @@ import java.util.Scanner;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Files {
+public class Files implements Serializable {
 
     private File file;
+    @Serial
+    private static final long serialVersionUID = 1234;
 
     /**
      * Quicksave a file.
@@ -57,8 +59,8 @@ public class Files {
 
     /**
      * Check if the filename is valid.
-     * @param fileName is the filename we want to check.
-     * @param directory is the directory we want to put the file into.
+     * @param fileName - the filename we want to check.
+     * @param directory - the directory we want to put the file into.
      * @return true if it is a valid fileName, and false otherwise.
      */
     public boolean checkFileName(String fileName, File directory) {
@@ -71,7 +73,8 @@ public class Files {
             return false;
         }
         for (File file : directory.listFiles()) {
-            if (file.getName().equals(fileName)) {
+            System.out.println(file.getName());
+            if (file.getName().equals(fileName+".ser")) {
                 System.out.println("File name already exists");
                 return false;
             }
@@ -85,21 +88,35 @@ public class Files {
         }
     }
 
-    /**
-     * Ask the player to provide a fileName.
-     * @param scanner scans the name of the file.
-     * @param directory is the directory where we want to save our file.
-     */
-    public void askFileName(Scanner scanner, File directory){
-        System.out.println("Filename:");
-        String filename = scanner.next();
-        while (!checkFileName(filename, directory)) {
-            System.out.println("Invalid filename. Try again.");
-            System.out.println("Filename:");
-            filename = scanner.next();
+    public void save(String fileName, File directory) {
+        File saveGame = new File("savedGames/"+fileName+".ser");
+        Files savedGames = new Files(saveGame);
+        savedGames.quickSaveTo();
+    }
+
+    public void load(File file, File directory) {
+    }
+
+    public void scanLoadFile(Scanner scanner, File directory) {
+        System.out.println("Which file? (-1 : none)");
+        int i = 0;
+        for (File file : directory.listFiles()) {
+            System.out.println(     "("+i+") "+file.getName());
+            i++;
         }
-        //Save filename
-        System.out.println("Save successful.");
+        int choice;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice >= -1 && choice < i) {
+                    break;
+                }
+                System.out.println("Invalid choice. Try again.");
+            } else {
+                System.out.println("Invalid character. Please enter a number.");
+            }
+        }
+        load(directory.getFile, directory);
     }
 }
 

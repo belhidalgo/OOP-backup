@@ -5,6 +5,7 @@ import nl.rug.oop.rpg.Inspectable;
 import nl.rug.oop.rpg.Interactable;
 import nl.rug.oop.rpg.characters.Character;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -17,6 +18,7 @@ public abstract class NPC extends Character implements Inspectable, Interactable
      * Implement the NPC.
      */
     protected String description;
+    @Serial
     private static final long serialVersionUID = 900;
 
     /**
