@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Scanner;
 
-import method 
+import static nl.rug.oop.rpg.Game.scan;
 
 /**
  * The Trader NPC subclass.
@@ -85,7 +85,7 @@ public class Trader extends NPC implements Interactable, Serializable {
         System.out.println("    (2) Rusty sword - 150 pennies");
         System.out.println("    (3) Funky purple fluid in a flask - 250 pennies");
         Scanner scanner = new Scanner(System.in);
-        int choice = scan(scanner, );
+        int choice = scan(scanner, -1, 3);
         switch (choice) {
             case -1:
                 break;

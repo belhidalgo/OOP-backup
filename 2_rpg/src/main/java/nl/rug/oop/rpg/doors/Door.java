@@ -32,11 +32,7 @@ public class Door implements Inspectable, Interactable, Serializable {
 
     @Override
     public void interact(Player player) {
-        if (player.getRoom().equals(room1)) {
-            player.setRoom(room2);
-        } else if (player.getRoom().equals(room2)) {
-            player.setRoom(room1);
-        }
+        player.setRoomBehind(this);
     }
 
 }

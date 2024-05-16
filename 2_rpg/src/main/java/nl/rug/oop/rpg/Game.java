@@ -49,7 +49,14 @@ public class Game implements Serializable {
         System.out.println("Save successful.");
     }
 
-    public int scan(Scanner scanner, int lowerBound, int upperBound) {
+    /**
+     * Asks the user for an integer n such that lowebound <= n <= upperbound.
+     * @param scanner - scans the input.
+     * @param lowerBound - the smallest value the user can input.
+     * @param upperBound - the greatest value the user can input.
+     * @return - returns the scanned integer within bounds.
+     */
+    public static int scan(Scanner scanner, int lowerBound, int upperBound) {
         int option;
         while (true) {
             if (scanner.hasNextInt()) {

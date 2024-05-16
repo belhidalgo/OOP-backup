@@ -18,16 +18,7 @@ public abstract class Character implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1100;
-    /**
-    * The damage it can inflict on others.
-    */
-    protected int strength;
-    /**
-     * Life left.
-     */
-    protected int health;
-    /**
-     * Money it has.
-     */
-    protected int money;
+    private int strength;
+    private int health;
+    private int money;
 }

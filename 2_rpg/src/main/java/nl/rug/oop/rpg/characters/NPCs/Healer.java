@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
 
+import static nl.rug.oop.rpg.Game.scan;
+
 /**
  * Healer class (Subclass of NPC).
  */
@@ -40,7 +42,7 @@ public class Healer extends NPC implements Interactable, Serializable {
         Random random = new Random();
         if (random.nextBoolean()) {
             System.out.println("The healer feels generous today and appreciates your kind gesture");
-            player.setHealth(player.getHealth() + strength);
+            player.setHealth(player.getHealth() + getStrength());
             System.out.println("Health level: "+ player.getHealth());
         } else {
             System.out.println("Tough luck, the healer doesn't appreciate your kind gesture");
@@ -61,7 +63,7 @@ public class Healer extends NPC implements Interactable, Serializable {
             System.out.println("Invalid choice. Try again another time!");
         } else {
             System.out.println("Tempting offer...");
-            player.setHealth(player.getHealth() + strength);
+            player.setHealth(player.getHealth() + getStrength());
             player.setMoney(player.getMoney() - offer);
             player.printStatus();
         }
@@ -81,7 +83,7 @@ public class Healer extends NPC implements Interactable, Serializable {
             System.out.println("Invalid choice. Try again another time!");
         } else {
             System.out.println("Tempting offer...");
-            player.setHealth(player.getHealth() + strength);
+            player.setHealth(player.getHealth() + getStrength());
             player.setStrength(player.getStrength() - damLevel);
             player.printStatus();
         }
@@ -94,7 +96,7 @@ public class Healer extends NPC implements Interactable, Serializable {
         System.out.println("    (1) Offer money");
         System.out.println("    (2) Offer some of your strength level");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = scan(scanner, 0, 2);
         switch (choice) {
             case 0:
                 optionKindGesture(player);

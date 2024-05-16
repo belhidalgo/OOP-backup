@@ -9,6 +9,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import static nl.rug.oop.rpg.Game.scan;
+
 /**
  * Enemy class.
  * Subclass of NPC.
@@ -51,35 +53,28 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
         Scanner scanner = new Scanner(System.in);
         System.out.println("You angered an enemy and now it has started attacking you!");
         attack(player);
-        int option;
         while (true) {
             System.out.println("What do you want to do?");
             System.out.println("    (0) Fight back!!!");
             System.out.println("    (1) Try to scooch away...");
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                if (option == 0) {
-                    if (getHealth() > 0 && player.getHealth() > 0) {
-                        player.attack(this);
-                        if (this.getHealth() <= 0) {
-                            System.out.println("Success! You killed the enemy!");
-                            player.setMoney(player.getMoney() + getMoney());
-                            System.out.println("You took the enemy's possessions." +
-                                    " You've gained "+getMoney()+" pennies.");
-                            break;
-                        }
-                        System.out.println("You've wounded the enemy!  Enemy's health: " + getHealth());
-                        attack(player);
-                        System.out.println("The enemy fought back! (Health: " + player.getHealth() + ")");
+            int option = scan(scanner, 0, 1);
+            if (option == 0) {
+                if (getHealth() > 0 && player.getHealth() > 0) {
+                    player.attack(this);
+                    if (this.getHealth() <= 0) {
+                        System.out.println("Success! You killed the enemy!");
+                        player.setMoney(player.getMoney() + getMoney());
+                        System.out.println("You took the enemy's possessions." +
+                                " You've gained "+getMoney()+" pennies.");
+                        break;
                     }
-                } else if (option == 1) {
-                    System.out.println("Pheww... that was a close call");
-                    break;
-                } else {
-                    System.out.println("Invalid option! Try again!");
+                    System.out.println("You've wounded the enemy!  Enemy's health: " + getHealth());
+                    attack(player);
+                    System.out.println("The enemy fought back! (Health: " + player.getHealth() + ")");
                 }
-            } else {
-                System.out.println("Invalid character. Please enter a number.");
+            } else if (option == 1) {
+                System.out.println("Pheww... that was a close call");
+                break;
             }
         }
     }

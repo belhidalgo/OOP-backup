@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 import lombok.*;
 
+import static nl.rug.oop.rpg.Game.scan;
+
 /**
  * An evil door (subclass of door) that attacks the player.
  */
@@ -49,11 +51,7 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
     private void status(Player player) {
         if (player.getHealth() > 0) {
             System.out.println("Congratulations! The Evil Door wasn't able to defeat you!");
-            if (player.getRoom().equals(this.getRoom1())) {
-                player.setRoom(this.getRoom2());
-            } else if (player.getRoom().equals(this.getRoom2())) {
-                player.setRoom(this.getRoom1());
-            }
+            player.setRoomBehind(this);
         } else {
             System.out.println("You should be ashamed, you have been killed by a door!");
         }
@@ -70,26 +68,20 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
             System.out.println("What do you want to do?");
             System.out.println("    (0) Fight!!!");
             System.out.println("    (1) Try to scooch away...");
-            if (scanner.hasNextInt()) {
-                int option = scanner.nextInt();
-                if (option == 0) {
-                    if (getHealth() > 0 && player.getHealth() > 0) {
-                        setHealth(health - player.getStrength());
-                        if (this.getHealth() <= 0) {
-                            return true;
-                        }
-                        System.out.println("You've wounded the door!  Door's health: " + getHealth());
-                        attack(player);
-                        System.out.println("The door fought back! (Health: " + player.getHealth() + ")");
+            int option = scan(scanner, 0, 1);
+            if (option == 0) {
+                if (getHealth() > 0 && player.getHealth() > 0) {
+                    setHealth(health - player.getStrength());
+                    if (this.getHealth() <= 0) {
+                        return true;
                     }
-                } else if (option == 1) {
-                    System.out.println("Pheww... that was a close call. However, you remain in the same room.");
-                    return false;
-                } else {
-                    System.out.println("Invalid option! Try again!");
+                    System.out.println("You've wounded the door!  Door's health: " + getHealth());
+                    attack(player);
+                    System.out.println("The door fought back! (Health: " + player.getHealth() + ")");
                 }
-            } else {
-                System.out.println("Invalid character. Please enter a number.");
+            } else if (option == 1) {
+                System.out.println("Pheww... that was a close call. However, you remain in the same room.");
+                return false;
             }
         }
     }

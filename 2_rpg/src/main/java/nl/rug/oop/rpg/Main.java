@@ -1,10 +1,6 @@
 package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.characters.Player;
-import nl.rug.oop.rpg.characters.NPCs.*;
-import nl.rug.oop.rpg.doors.Door;
-import nl.rug.oop.rpg.doors.Evil;
-import nl.rug.oop.rpg.doors.Trap;
 
 /**
  * The main class.
@@ -21,4 +17,3 @@ public class Main {
         game.play(player1);
     }
 }
-// Add your code here :)

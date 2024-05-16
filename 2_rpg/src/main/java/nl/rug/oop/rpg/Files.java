@@ -8,6 +8,8 @@ import lombok.Setter;
 import java.io.*;
 import java.util.Scanner;
 
+import static nl.rug.oop.rpg.Game.scan;
+
 /**
  * The Files class.
  */
@@ -113,17 +115,10 @@ public class Files implements Serializable {
             System.out.println(     "("+i+") "+file.getName());
             i++;
         }
-        int choice;
-        while (true) {
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-                if (choice >= -1 && choice < i) {
-                    break;
-                }
-                System.out.println("Invalid choice. Try again.");
-            } else {
-                System.out.println("Invalid character. Please enter a number.");
-            }
+        int choice = scan(scanner, -1, i - 1);
+        if (choice == -1) {
+            System.out.println("No files chosen");
+            return;
         }
         i = 0;
         for (File file : directory.listFiles()) {

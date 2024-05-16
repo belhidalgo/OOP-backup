@@ -33,11 +33,7 @@ public class Trap extends Door implements Interactable, Serializable {
         player.setHealth(player.getHealth() - damage);
         if (player.getHealth() > 0) {
             System.out.println("Congratulations! The Evil Door wasn't able to kill you!");
-            if (player.getRoom().equals(this.getRoom1())) {
-                player.setRoom(this.getRoom2());
-            } else if (player.getRoom().equals(this.getRoom2())) {
-                player.setRoom(this.getRoom1());
-            }
+            player.setRoomBehind(this);
         } else {
             System.out.println("You should be ashamed, you have been killed by a door!");
         }

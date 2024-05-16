@@ -3,6 +3,7 @@ package nl.rug.oop.rpg.characters;
 import lombok.*;
 import nl.rug.oop.rpg.Attackable;
 import nl.rug.oop.rpg.Room;
+import nl.rug.oop.rpg.doors.Door;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -47,16 +48,28 @@ public class Player extends Character implements Attackable, Serializable {
 
     @Override
     public void attack(Character target) {
-        target.setHealth(target.getHealth() - strength);
+        target.setHealth(target.getHealth() - getStrength());
+    }
+
+    /**
+     * Set the room the player is in to the room behind the chosen door.
+     * @param door is the door we want to cross.
+     */
+    public void setRoomBehind(Door door) {
+        if (getRoom().equals(door.getRoom1())) {
+            setRoom(door.getRoom2());
+        } else if (getRoom().equals(door.getRoom2())) {
+            setRoom(door.getRoom1());
+        }
     }
 
     /**
      * Print the current damage, health and money.
      */
     public void printStatus() {
-        System.out.println("Strength level: " + strength);
-        System.out.println("Health level: " + health);
-        System.out.println("Wealth: " + money);
+        System.out.println("Strength level: " + getStrength());
+        System.out.println("Health level: " + getHealth());
+        System.out.println("Wealth: " + getMoney());
     }
 
     /**

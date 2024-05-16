@@ -33,7 +33,7 @@ public class Wizard extends NPC implements Interactable, Serializable {
     @Override
     public void interact(Player player) {
         System.out.println("The wizard decided to be generous and increased your powers.");
-        player.setStrength(player.getStrength() + strength);
+        player.setStrength(player.getStrength() + getStrength());
         System.out.println("Damage level: " + player.getStrength());
         System.out.println("Health level: " + player.getHealth());
     }
