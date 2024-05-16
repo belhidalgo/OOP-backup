@@ -56,6 +56,9 @@ public class Healer extends NPC implements Interactable, Serializable {
     private void optionMoney(Player player) {
         System.out.println("How much money are you offering (money available: " + player.getMoney() + " coins)");
         Scanner scanner = new Scanner(System.in);
+        while (!scanner.hasNextInt()) {
+            System.out.println("Please enter a number");
+        }
         int offer = scanner.nextInt();
         if (offer < (player.getMoney() * 0.2)) {
             System.out.println("Incredibly disappointing offer... don't assume I'm cheap.");
@@ -74,8 +77,12 @@ public class Healer extends NPC implements Interactable, Serializable {
      * @param player is the player who chose the option 2.
      */
     private void optionStrength(Player player) {
-        System.out.println("How much of your strength level are you offering?");
+        System.out.println("How much of your strength level are you offering? " +
+                "(Strength available: " + player.getStrength() + ")");
         Scanner scanner = new Scanner(System.in);
+        while (!scanner.hasNextInt()) {
+            System.out.println("Please enter a number");
+        }
         int damLevel = scanner.nextInt();
         if (damLevel < (player.getStrength() * 0.2)) {
             System.out.println("Incredibly disappointing offer...");
