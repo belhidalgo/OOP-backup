@@ -73,12 +73,18 @@ public class Player extends Character implements Attackable, Serializable {
             System.out.print(" You see:");
             room.listNPCs();
             System.out.println("Interact? (-1 : do nothing)");
-            int npc = scanner.nextInt();
-            if (npc >= -1 && npc < room.getNPCs().size()) {
-                room.chooseNPC(npc, this);
-                break;
-            } else {
-                System.out.println("You gave an invalid number. Try again.");
+            int npc;
+            while (true) {
+                if (scanner.hasNextInt()) {
+                    npc = scanner.nextInt();
+                    if (npc >= -1 && npc < room.getNPCs().size()) {
+                        room.chooseNPC(npc, this);
+                        break;
+                    }
+                    System.out.println("Invalid choice. Try again.");
+                } else {
+                    System.out.println("Invalid character. Please enter a number.");
+                }
             }
         }
 
@@ -94,12 +100,18 @@ public class Player extends Character implements Attackable, Serializable {
             System.out.println("You look around for doors. You see:");
             room.listDoors();
             System.out.println("Which door do you take? (-1 : stay here)");
-            int doorOption = scanner.nextInt();
-            if (doorOption >= -1 && doorOption < room.getDoors().size()) {
-                room.chooseDoor(doorOption, this);
-                break;
-            } else {
-                System.out.println("You gave an invalid number. Try again.");
+            int doorOption;
+            while (true) {
+                if (scanner.hasNextInt()) {
+                    doorOption = scanner.nextInt();
+                    if (doorOption >= -1 && doorOption < room.getDoors().size()) {
+                        room.chooseDoor(doorOption, this);
+                        break;
+                    }
+                    System.out.println("Invalid choice. Try again.");
+                } else {
+                    System.out.println("Invalid character. Please enter a number.");
+                }
             }
         }
     }

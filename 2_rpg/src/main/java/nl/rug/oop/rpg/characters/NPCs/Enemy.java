@@ -51,21 +51,33 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
         Scanner scanner = new Scanner(System.in);
         System.out.println("You angered an enemy and now it has started attacking you!");
         attack(player);
-        System.out.println("What do you want to do?");
-        System.out.println("    (0) Fight back!!!");
-        System.out.println("    (1) Try to scooch away...");
-        int option = scanner.nextInt();
-        if (option == 0) {
-            while (getHealth() > 0 && player.getHealth() > 0) {
-                player.attack(this);
-                if (this.getHealth() <= 0) {
-                    System.out.println("Success! You killed the enemy!");
+        int option;
+        while (true) {
+            System.out.println("What do you want to do?");
+            System.out.println("    (0) Fight back!!!");
+            System.out.println("    (1) Try to scooch away...");
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+                if (option == 0) {
+                    if (getHealth() > 0 && player.getHealth() > 0) {
+                        player.attack(this);
+                        if (this.getHealth() <= 0) {
+                            System.out.println("Success! You killed the enemy!");
+                            break;
+                        }
+                        System.out.println("You've wounded the enemy!  Enemy's health: " + getHealth());
+                        attack(player);
+                        System.out.println("The enemy fought back! (Health: " + player.getHealth() + ")");
+                    }
+                } else if (option == 1) {
+                    System.out.println("Pheww... that was a close call");
                     break;
+                } else {
+                    System.out.println("Invalid option! Try again!");
                 }
-                attack(player);
+            } else {
+                System.out.println("Invalid character. Please enter a number.");
             }
-        } else if (option == 1) {
-            System.out.println("Pheww... that was a close call");
         }
     }
 }

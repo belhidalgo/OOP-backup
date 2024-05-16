@@ -15,7 +15,6 @@ import java.util.Scanner;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Files implements Serializable {
 
     private File file;
@@ -116,7 +115,7 @@ public class Files implements Serializable {
                 System.out.println("Invalid character. Please enter a number.");
             }
         }
-        load(directory.getFile, directory);
+        load(directory., directory);
     }
 }
 
