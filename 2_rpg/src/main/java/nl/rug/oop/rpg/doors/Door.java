@@ -17,9 +17,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 
+
 public class Door implements Inspectable, Interactable, Serializable {
     private String description;
-    private Room roomBehind;
+    private Room room1;
+    private Room room2;
     @Serial
     private static final long serialVersionUID = 200;
 
@@ -30,7 +32,11 @@ public class Door implements Inspectable, Interactable, Serializable {
 
     @Override
     public void interact(Player player) {
-        player.setRoom(roomBehind);
+        if (player.getRoom().equals(room1)) {
+            player.setRoom(room2);
+        } else if (player.getRoom().equals(room2)) {
+            player.setRoom(room1);
+        }
     }
 
 }

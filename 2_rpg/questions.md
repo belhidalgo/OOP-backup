@@ -37,6 +37,37 @@ ___
 
 Answer:
 
+We would choose the first implementation, since in that one 'description' is a private field instead of a public one.
+This implementation is better, because it uses encapsulation which prevents users from modifying the internal
+description of a room. 
+
+By implementing getter and setter methods, as shown in the first implementation, we are hiding the field's internal 
+representation from the caller. Therefore, it provides maintainability since it can change the representation
+without having to modify the callers.
+
+Additionally, we can implement other constraints within the setter and getter functions to make sure that the
+descriptions of the fields are valid. Plus, by controlling how the description is accessed and modified, 
+we can ensure that the object's state remains consistent.
+
+Public fields can have some benefits, for example they are straightforward to use. They can be accessed directly without
+any getter or setter methods, and they can also make code easier to read in simple cases or reduce repetitive code.
+
+However, if we made certain fields public (such as in this case 'description'), each time the representation changed,
+every call to that field would have to change as well, which would be extremely inconvenient. With public fields we also
+lose control over the access and mutation of the data, leaving us without ways of enforcing constraints or performing
+actions when a field is accessed or modified.
+
+For instance, with the above former implementation, we could check that the description is not null before updating it.
+```java
+    public void setDescription(String description) {
+        if (description != null) {
+            this.description = description;
+        } else {
+            System.out.println("That is not a valid description");
+        }
+    }
+```
+
 ___
 
 # Question 2
@@ -60,6 +91,32 @@ ___
 
 Answer:
 
+We think interfaces are extremely useful, especially when we want a class to inherit multiple behaviours that aren't in their
+superclasses, associating classes that aren't connected through superclass-subclass links or establishing the name, return value
+and parameters of a method without implementing the method itself.
+
+Interfaces can promote polymorphism by implementing one method in different classes that aren't related.
+In java, one class can only inherit a method from its superclasses or if the method itself is defined within the class, 
+however interfaces allow objects of different classes to be treated interchangeably if they implement the same interface.
+
+Also, Java doesn't support multiple inheritance with classes, which means that a class can only extend one other class. 
+However, a class is allowed to implement multiple interfaces, which allows multiple inheritance through interfaces and 
+therefore enabling inheritance of a class from multiple sources.
+
+Interfaces also promote abstraction by defining a contract specifying the behaviour that an implementing class must adhere
+to, without providing the details of the implementation. It also promotes loose coupling and decoupling by defining a
+common interface that classes can implement without needing to know each other's implementation details.
+
+For example, in our code we wanted a player to be able to interact with a door, but also with an NPC. These two classes
+were not connected by any superclass. Hence, instead of implementing two different methods 'interact' in 'Player', we
+created an interface 'Interactable' that was already defined as void, with the parameter 'player'. This way, both classes
+were related by one same method with different implementations in each. 
+
+Overall, we disagree with this opinion of interfaces being unuseful because even though interfaces don't contain implementations,
+they provide many other benefits such as helping the application of polymorphism, multiple
+inheritance, abstraction or decoupling; all of which are key characteristics of java.
+
+
 ___
 
 # Question 3
@@ -75,4 +132,7 @@ ___
 
 Answer:
 
+Both `FileOutputStream` and `ObjectOutputStream` implement the Decorator pattern in their read and write operations. The 
+Decorator pattern allows the addition of behaviors to individual objects dynamically at runtime, without it affecting the 
+other instances of the same class. 
 ___

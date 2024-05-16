@@ -24,12 +24,12 @@ public abstract class NPC extends Character implements Inspectable, Interactable
     /**
      * New NPC.
      * @param description the description of the NPC.
-     * @param damage the damage the NPC can inflict.
+     * @param strength the damage the NPC can inflict.
      * @param health the life of the NPC.
      * @param money the money of the NPC.
      */
-    public NPC(String description, int damage, int health, int money) {
-        super(damage, health, money);
+    public NPC(String description, int strength, int health, int money) {
+        super(strength, health, money);
         this.description = description;
     }
 }

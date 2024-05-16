@@ -7,6 +7,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import method 
+
 /**
  * The Trader NPC subclass.
  */
@@ -19,12 +21,12 @@ public class Trader extends NPC implements Interactable, Serializable {
     /**
      * New Trader.
      * @param description the description of the trader.
-     * @param damage the damage the trader can inflict.
+     * @param strength the damage the trader can inflict.
      * @param health the life of the trader.
      * @param money the money it has.
      */
-    public Trader(String description, int damage, int health, int money) {
-        super(description, damage, health, money);
+    public Trader(String description, int strength, int health, int money) {
+        super(description, strength, health, money);
     }
 
     @Override
@@ -83,7 +85,7 @@ public class Trader extends NPC implements Interactable, Serializable {
         System.out.println("    (2) Rusty sword - 150 pennies");
         System.out.println("    (3) Funky purple fluid in a flask - 250 pennies");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        int choice = scan(scanner, );
         switch (choice) {
             case -1:
                 break;
@@ -101,7 +103,6 @@ public class Trader extends NPC implements Interactable, Serializable {
                 break;
             default:
                 System.out.println("Invalid choice");
-                break;
         }
     }
 }

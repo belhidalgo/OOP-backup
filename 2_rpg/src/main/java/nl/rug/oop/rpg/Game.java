@@ -19,7 +19,7 @@ public class Game implements Serializable {
     /**
      * Print the menu with the different options for the player.
      */
-    public void printMenu() {
+    private void printMenu() {
         System.out.println("What do you want to do?");
         System.out.println("    (0) Look around");
         System.out.println("    (1) Look for a way out");
@@ -33,10 +33,11 @@ public class Game implements Serializable {
 
     /**
      * Ask the player to provide a fileName.
-     * @param scanner scans the name of the file.
-     * @param directory is the directory where we want to save our file.
+     * @param scanner - scans the name of the file.
+     * @param directory - the directory where we want to save our file.
      */
-    public void askFileName(Scanner scanner, File directory, Files files){
+    private void askFileName(Scanner scanner, File directory){
+        Files files = new Files();
         System.out.println("Filename:");
         String filename = scanner.next();
         while (!files.checkFileName(filename, directory)) {
@@ -46,6 +47,21 @@ public class Game implements Serializable {
         }
         files.save(filename, directory);
         System.out.println("Save successful.");
+    }
+
+    public int scan(Scanner scanner, int lowerBound, int upperBound) {
+        int option;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+                if (option >= lowerBound && option <= upperBound) {
+                    return option;
+                }
+                System.out.println("Invalid choice. Try again.");
+            } else {
+                System.out.println("Invalid character. Please enter a number.");
+            }
+        }
     }
 
     /**
@@ -58,9 +74,10 @@ public class Game implements Serializable {
         File saveGame = new File("savedGames/quicksave.ser");
         Files files = new Files(saveGame);
         Scanner scanner = new Scanner(System.in);
-        while (player.getHealth() > 0) {
+        boolean win = false;
+        while (player.getHealth() > 0 || !win) {
             printMenu();
-            int option = scanner.nextInt();
+            int option = scan(scanner, 0, 7);
             switch (option) {
                 case 0:
                     System.out.println("You see: ");
@@ -82,13 +99,10 @@ public class Game implements Serializable {
                     files.quickLoadFromFile();
                     break;
                 case 6:
-                    askFileName(scanner, saveDirectory, new Files());
+                    askFileName(scanner, saveDirectory);
                     break;
                 case 7:
                     files.scanLoadFile(scanner, saveDirectory);
-                    break;
-                default:
-                    System.out.println("Invalid option. Try again.");
             }
         }
     }

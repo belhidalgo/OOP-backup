@@ -36,7 +36,7 @@ public class Healer extends NPC implements Interactable, Serializable {
      * Player chose to offer the Healer a kind gesture.
      * @param player is the player who chose the option 0.
      */
-    public void option0(Player player) {
+    private void optionKindGesture(Player player) {
         Random random = new Random();
         if (random.nextBoolean()) {
             System.out.println("The healer feels generous today and appreciates your kind gesture");
@@ -51,7 +51,7 @@ public class Healer extends NPC implements Interactable, Serializable {
      * Player chose to offer the healer money.
      * @param player is the player who chose the option 1.
      */
-    public void option1(Player player) {
+    private void optionMoney(Player player) {
         System.out.println("How much money are you offering (money available: " + player.getMoney() + " coins)");
         Scanner scanner = new Scanner(System.in);
         int offer = scanner.nextInt();
@@ -71,8 +71,8 @@ public class Healer extends NPC implements Interactable, Serializable {
      * Player chose to offer the healer some of its damage level.
      * @param player is the player who chose the option 2.
      */
-    public void option2(Player player) {
-        System.out.println("How much of your damage level are you offering?");
+    private void optionStrength(Player player) {
+        System.out.println("How much of your strength level are you offering?");
         Scanner scanner = new Scanner(System.in);
         int damLevel = scanner.nextInt();
         if (damLevel < (player.getStrength() * 0.2)) {
@@ -92,19 +92,18 @@ public class Healer extends NPC implements Interactable, Serializable {
         System.out.println("You found a healer! What offer can you make for them?");
         System.out.println("    (0) A kind gesture");
         System.out.println("    (1) Offer money");
-        System.out.println("    (2) Offer some of you damage level");
+        System.out.println("    (2) Offer some of your strength level");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         switch (choice) {
             case 0:
-                option0(player);
+                optionKindGesture(player);
                 break;
             case 1:
-                option1(player);
+                optionMoney(player);
                 break;
             case 2:
-                option2(player);
-                break;
+                optionStrength(player);
         }
     }
 }

@@ -72,7 +72,6 @@ public class Files implements Serializable {
             return false;
         }
         for (File file : directory.listFiles()) {
-            System.out.println(file.getName());
             if (file.getName().equals(fileName+".ser")) {
                 System.out.println("File name already exists");
                 return false;
@@ -87,16 +86,27 @@ public class Files implements Serializable {
         }
     }
 
+    /**
+     * Saves current game status with the given name by the user.
+     * @param fileName - the name of the file given by the user.
+     * @param directory - the directory in which the file should be saved.
+     */
     public void save(String fileName, File directory) {
         File saveGame = new File("savedGames/"+fileName+".ser");
         Files savedGames = new Files(saveGame);
         savedGames.quickSaveTo();
     }
 
-    public void load(File file, File directory) {
-    }
-
+    /**
+     * It scans the file chosen and loads it.
+     * @param scanner - scans the input of the user.
+     * @param directory - the directory we want the user to choose a file from.
+     */
     public void scanLoadFile(Scanner scanner, File directory) {
+        if (directory.listFiles() == null ) {
+            System.out.println("No files found");
+            return;
+        }
         System.out.println("Which file? (-1 : none)");
         int i = 0;
         for (File file : directory.listFiles()) {
@@ -115,7 +125,20 @@ public class Files implements Serializable {
                 System.out.println("Invalid character. Please enter a number.");
             }
         }
-        load(directory., directory);
+        i = 0;
+        for (File file : directory.listFiles()) {
+            if (i == choice) {
+                Files loadFiles = new Files(file);
+                loadFiles.quickLoadFromFile();
+                break;
+            }
+            i++;
+        }
+        if (choice == i) {
+            System.out.println("Game loaded successfully.");
+        } else {
+            System.out.println("Loading was unsuccessful.");
+        }
     }
 }
 

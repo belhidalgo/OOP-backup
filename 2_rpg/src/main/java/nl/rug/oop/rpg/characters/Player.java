@@ -65,26 +65,24 @@ public class Player extends Character implements Attackable, Serializable {
      */
     public void lookForCompany(Scanner scanner) {
         while (true) {
-            System.out.println("You look if there’s someone here.");
+            System.out.print("You look if there’s someone here.");
             if (room.getNPCs().isEmpty()) {
-                System.out.println("You have no company.");
+                System.out.println("\nYou have no company.");
                 return;
             }
-            System.out.print(" You see:");
+            System.out.println(" You see:");
             room.listNPCs();
             System.out.println("Interact? (-1 : do nothing)");
             int npc;
-            while (true) {
-                if (scanner.hasNextInt()) {
-                    npc = scanner.nextInt();
-                    if (npc >= -1 && npc < room.getNPCs().size()) {
-                        room.chooseNPC(npc, this);
-                        break;
-                    }
-                    System.out.println("Invalid choice. Try again.");
-                } else {
-                    System.out.println("Invalid character. Please enter a number.");
+            if (scanner.hasNextInt()) {
+                npc = scanner.nextInt();
+                if (npc >= -1 && npc < room.getNPCs().size()) {
+                    room.chooseNPC(npc, this);
+                    break;
                 }
+                System.out.println("Invalid choice. Try again.");
+            } else {
+                System.out.println("Invalid character. Please enter a number.");
             }
         }
 
@@ -101,17 +99,15 @@ public class Player extends Character implements Attackable, Serializable {
             room.listDoors();
             System.out.println("Which door do you take? (-1 : stay here)");
             int doorOption;
-            while (true) {
-                if (scanner.hasNextInt()) {
-                    doorOption = scanner.nextInt();
-                    if (doorOption >= -1 && doorOption < room.getDoors().size()) {
-                        room.chooseDoor(doorOption, this);
-                        break;
-                    }
-                    System.out.println("Invalid choice. Try again.");
-                } else {
-                    System.out.println("Invalid character. Please enter a number.");
+            if (scanner.hasNextInt()) {
+                doorOption = scanner.nextInt();
+                if (doorOption >= -1 && doorOption < room.getDoors().size()) {
+                    room.chooseDoor(doorOption, this);
+                    break;
                 }
+                System.out.println("Invalid choice. Try again.");
+            } else {
+                System.out.println("Invalid character. Please enter a number.");
             }
         }
     }

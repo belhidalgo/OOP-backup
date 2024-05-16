@@ -26,12 +26,13 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
     /**
      * We create a new Evil Door.
      * @param description is the description of the door.
-     * @param roomBehind is the room behind the door.
+     * @param room1 is one of the rooms the door is connected to.
+     * @param room2 is the other room connected to by the door.
      * @param damage is the damage the room can inflict.
      * @param health is the life the door has left.
      */
-    public Evil(String description, Room roomBehind, int damage, int health) {
-        super(description, roomBehind);
+    public Evil(String description, Room room1, Room room2, int damage, int health) {
+        super(description, room1, room2);
         this.damage = damage;
         this.health = health;
     }
@@ -45,12 +46,51 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
      * Print whether the player has defeated the door.
      * @param player is the player who tries to cross the door.
      */
-    public void status(Player player) {
+    private void status(Player player) {
         if (player.getHealth() > 0) {
             System.out.println("Congratulations! The Evil Door wasn't able to defeat you!");
-            player.setRoom(getRoomBehind());
+            if (player.getRoom().equals(this.getRoom1())) {
+                player.setRoom(this.getRoom2());
+            } else if (player.getRoom().equals(this.getRoom2())) {
+                player.setRoom(this.getRoom1());
+            }
         } else {
             System.out.println("You should be ashamed, you have been killed by a door!");
+        }
+    }
+
+    /**
+     * Combat options.
+     * @param player - the player who fights against the door.
+     * @param scanner - scanner to read the user's input.
+     * @return - true if the player fights until the end, anf false otherwise.
+     */
+    private boolean combat(Player player, Scanner scanner) {
+        while (true) {
+            System.out.println("What do you want to do?");
+            System.out.println("    (0) Fight!!!");
+            System.out.println("    (1) Try to scooch away...");
+            if (scanner.hasNextInt()) {
+                int option = scanner.nextInt();
+                if (option == 0) {
+                    if (getHealth() > 0 && player.getHealth() > 0) {
+                        setHealth(health - player.getStrength());
+                        if (this.getHealth() <= 0) {
+                            return true;
+                        }
+                        System.out.println("You've wounded the door!  Door's health: " + getHealth());
+                        attack(player);
+                        System.out.println("The door fought back! (Health: " + player.getHealth() + ")");
+                    }
+                } else if (option == 1) {
+                    System.out.println("Pheww... that was a close call. However, you remain in the same room.");
+                    return false;
+                } else {
+                    System.out.println("Invalid option! Try again!");
+                }
+            } else {
+                System.out.println("Invalid character. Please enter a number.");
+            }
         }
     }
 
@@ -58,27 +98,32 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
     public void interact(Player player) {
         System.out.println("Oh no! The door you decided to cross is evil! Do you still want to cross it? (y/n)");
         Scanner scanner = new Scanner(System.in);
-        String choice = scanner.next();
-        if (choice.equals("n")) {
-            return;
-        }
-        if (player.getProtection() > 0) {
-            System.out.println("Do you want to use your protection? (y/n)");
-            choice = scanner.next();
-            if (choice.equals("y")) {
-                player.setProtection(player.getProtection() - 1);
-                status(player);
+        while (true) {
+            String choice = scanner.next();
+            if (choice.equals("n")) {
                 return;
+            } else if (choice.equals("y") && player.getProtection() > 0) {
+                while (true) {
+                    System.out.println("Do you want to use your protection? (y/n)");
+                    choice = scanner.next();
+                    if (choice.equals("y")) {
+                        player.setProtection(player.getProtection() - 1);
+                        status(player);
+                        return;
+                    } else if (choice.equals("n")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid option. Try again.");
+                    }
+                }
+            } else if (choice.equals("y")) {
+                break;
+            } else {
+                System.out.println("Invalid option. Try again.");
             }
         }
-        while (player.getHealth() > 0 && health > 0) {
-            setHealth(health - player.getStrength());
-            if (health <= 0) {
-                status(player);
-                return;
-            }
-            attack(player);
+        if (combat(player, scanner)) {
+            status(player);
         }
-        status(player);
     }
 }

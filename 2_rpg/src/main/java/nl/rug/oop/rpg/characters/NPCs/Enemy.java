@@ -63,6 +63,9 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
                         player.attack(this);
                         if (this.getHealth() <= 0) {
                             System.out.println("Success! You killed the enemy!");
+                            player.setMoney(player.getMoney() + getMoney());
+                            System.out.println("You took the enemy's possessions." +
+                                    " You've gained "+getMoney()+" pennies.");
                             break;
                         }
                         System.out.println("You've wounded the enemy!  Enemy's health: " + getHealth());
