@@ -29,6 +29,27 @@ public class Game implements Serializable {
         System.out.println("    (5) QuickLoad");
         System.out.println("    (6) Save");
         System.out.println("    (7) Load");
+        System.out.println("    (8) Exit");
+    }
+
+    /**
+     * Player chose to exit the game.
+     * @param player - player who made the choice.
+     * @param scanner - scans the user input.
+     * @return - true if the player wants to exit, false otherwise.
+     */
+    private boolean exit(Player player, Scanner scanner) {
+        System.out.println("Are you sure you want to exit? (y/n)");
+        while (true) {
+            String choice = scanner.next();
+            if (choice.equals("n")) {
+                return false;
+            } else if (choice.equals("y")) {
+                return true;
+            } else {
+                System.out.println("Invalid option. Try again.");
+            }
+        }
     }
 
     /**
@@ -65,8 +86,8 @@ public class Game implements Serializable {
             }
             System.out.println("Invalid choice. Try again.");
         } else {
+            scanner.next();
             System.out.println("Invalid character. Please enter a number.");
-            scanner.nextLine();
         }
         return -2;
     }
@@ -81,10 +102,9 @@ public class Game implements Serializable {
         File saveGame = new File("savedGames/quicksave.ser");
         Files files = new Files(saveGame);
         Scanner scanner = new Scanner(System.in);
-        while (player.getHealth() > 0 || player.isWin()) {
+        while (player.getHealth() > 0 && !player.isWin()) {
             printMenu();
-            int option = scan(scanner, 0, 7);
-            switch (option) {
+            switch (scan(scanner, 0, 8)) {
                 case 0:
                     player.lookAround();
                     break;
@@ -108,6 +128,11 @@ public class Game implements Serializable {
                     break;
                 case 7:
                     files.scanLoadFile(scanner, saveDirectory);
+                    break;
+                case 8:
+                    if (exit(player, scanner)) {
+                        return;
+                    }
             }
         }
     }

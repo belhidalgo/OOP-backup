@@ -76,9 +76,6 @@ public class Room implements Inspectable, Serializable {
             System.out.println("You stay here");
         } else {
             doors.get(option).interact(player);
-            if (player.getHealth() > 0) {
-                System.out.println("You go through the door");
-            }
         }
     }
 

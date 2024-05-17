@@ -67,7 +67,7 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
         while (true) {
             System.out.println("What do you want to do?");
             System.out.println("    (0) Fight!!!");
-            System.out.println("    (1) Try to scooch away...");
+            System.out.println("    (1) I give up, I'll just stay here...");
             int option = scan(scanner, 0, 1);
             if (option == 0) {
                 if (getHealth() > 0 && player.getHealth() > 0) {

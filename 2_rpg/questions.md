@@ -110,7 +110,8 @@ common interface that classes can implement without needing to know each other's
 For example, in our code we wanted a player to be able to interact with a door, but also with an NPC. These two classes
 were not connected by any superclass. Hence, instead of implementing two different methods 'interact' in 'Player', we
 created an interface 'Interactable' that was already defined as void, with the parameter 'player'. This way, both classes
-were related by one same method with different implementations in each. 
+were related by one same method with different implementations in each. Other example is shown in question 3, where interfaces
+are used to extend the behaviour of objects in a class without modifying the class itself.
 
 Overall, we disagree with this opinion of interfaces being unuseful because even though interfaces don't contain implementations,
 they provide many other benefits such as helping the application of polymorphism, multiple
@@ -133,6 +134,27 @@ ___
 Answer:
 
 Both `FileOutputStream` and `ObjectOutputStream` implement the Decorator pattern in their read and write operations. The 
-Decorator pattern allows the addition of behaviors to individual objects dynamically at runtime, without it affecting the 
-other instances of the same class. 
+Decorator pattern allows the addition of behaviors to individual objects dynamically at runtime, with the use of 
+inheritance, so that all the instances of that class obtain the extended behaviour without modifying the class itself.
+
+This design pattern consists of an abstract component, an interface. In this case, this role is played by the `OutputStream`
+interface. It defines the raw structure of methods for objects that can have their behaviour dynamically extended by implementing
+operations such as 'write'.
+
+Then, we need to implement the interface to an object in order to potentially extend its methods. In the `ObjectOutputStream` interface,
+this object is `FileOutputStream`, which writes raw bytes to a file. 
+
+Once we have the concrete object and the abstract interface, we want to link them. It is made by means of an abstract decorator class. The 
+decorator both implements the interface and has a reference to the object. In this case, the decorator is `FilterOutputStream`, an 
+abstract class that implements OutputStream (abstract interface) and contains an instance of this class.
+
+Finally, once we have all of the above, we also need a concrete decorator classes that are subclasses of the abstract decorator. 
+They are used to implement its behaviour. Here, `ObjectOutputStream` is one of these subclasses of `FilterOutputStream`. Its role
+is to improve functionality by adding abilities for writing objects, data types and strings so that an ObjectInputStream is able to read
+them back.
+
+The main benefit of this pattern is the extension of new behaviours to objects without modifying them, making these methods able to be reused. 
+This way, when new functionality is implemented, the risk of errors is significantly reduced. Plus, it adds these behaviours dynamically at runtime 
+instead of using a hierarchy chain of inheritance, thereby making the code more readable and solid. In short, by implementing the decorator pattern
+FileOutputStream and ObjectOutputStream provide a flexible way to enhance I/O stream capabilities.
 ___

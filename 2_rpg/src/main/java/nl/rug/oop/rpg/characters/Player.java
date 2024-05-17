@@ -65,6 +65,7 @@ public class Player extends Character implements Attackable, Serializable {
         } else if (getRoom().equals(door.getRoom2())) {
             setRoom(door.getRoom1());
         }
+        System.out.println("You go through the door");
     }
 
     /**
@@ -90,22 +91,19 @@ public class Player extends Character implements Attackable, Serializable {
             System.out.println(" You see:");
             room.listNPCs();
             System.out.println("Interact? (-1 : do nothing)");
-            int npc;
             if (scanner.hasNextInt()) {
-                npc = scanner.nextInt();
+                int npc = scanner.nextInt();
                 if (npc >= -1 && npc < room.getNPCs().size()) {
                     room.chooseNPC(npc, this);
-                    if (npc == -1) {
-                        break;
-                    } else if (getHealth() <= 0) {
+                    if (npc == -1 || getHealth() <= 0) {
                         break;
                     }
                 } else {
                     System.out.println("Invalid choice. Try again.");
                 }
             } else {
+                scanner.next();
                 System.out.println("Invalid character. Please enter a number.");
-                scanner.nextLine();
             }
         }
 
@@ -121,17 +119,17 @@ public class Player extends Character implements Attackable, Serializable {
             System.out.println("You look around for doors. You see:");
             room.listDoors();
             System.out.println("Which door do you take? (-1 : stay here)");
-            int doorOption;
             if (scanner.hasNextInt()) {
-                doorOption = scanner.nextInt();
+                int doorOption = scanner.nextInt();
                 if (doorOption >= -1 && doorOption < room.getDoors().size()) {
                     room.chooseDoor(doorOption, this);
                     break;
+                } else {
+                    System.out.println("Invalid choice. Try again.");
                 }
-                System.out.println("Invalid choice. Try again.");
             } else {
+                scanner.next();
                 System.out.println("Invalid character. Please enter a number.");
-                scanner.nextLine();
             }
         }
     }

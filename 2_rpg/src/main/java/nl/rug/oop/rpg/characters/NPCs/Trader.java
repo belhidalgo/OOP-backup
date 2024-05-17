@@ -105,6 +105,7 @@ public class Trader extends NPC implements Interactable, Serializable {
                 break;
             default:
                 System.out.println("Invalid choice");
+                break;
         }
     }
 }
