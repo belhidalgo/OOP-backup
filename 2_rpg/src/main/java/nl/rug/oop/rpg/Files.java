@@ -28,7 +28,7 @@ public class Files implements Serializable {
      */
     public void quickSaveTo() {
         try {
-            FileOutputStream stream = new FileOutputStream(this.file);
+            FileOutputStream stream = new FileOutputStream(file);
             ObjectOutputStream objectStream = new ObjectOutputStream(stream);
             objectStream.writeObject(this);
             objectStream.close();
@@ -44,7 +44,7 @@ public class Files implements Serializable {
      */
     public void quickLoadFromFile() {
         try {
-            FileInputStream inputStream = new FileInputStream(this.file);
+            FileInputStream inputStream = new FileInputStream(file);
             ObjectInputStream objectStream = new ObjectInputStream(inputStream);
             objectStream.readObject();
             objectStream.close();
