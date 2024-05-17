@@ -27,9 +27,10 @@ public abstract class NPC extends Character implements Inspectable, Interactable
      * @param strength the strength the NPC can inflict.
      * @param health the life of the NPC.
      * @param money the money of the NPC.
+     * @param key determines if the character has the key in its possession
      */
-    public NPC(String description, int strength, int health, int money) {
-        super(strength, health, money);
+    public NPC(String description, int strength, int health, int money, boolean key) {
+        super(strength, health, money, key);
         this.description = description;
     }
 }

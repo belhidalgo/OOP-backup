@@ -23,6 +23,7 @@ public class Player extends Character implements Attackable, Serializable {
     private String name;
     private Room room;
     private int protection;
+    private boolean win;
     @Serial
     private static final long serialVersionUID = 100;
 
@@ -34,12 +35,14 @@ public class Player extends Character implements Attackable, Serializable {
      * @param health the life of the player.
      * @param money the money it has.
      * @param protection the protection level of the player.
+     * @param key determines if the character has the key in its possession
      */
-    public Player(String name, Room room, int damage, int health, int money, int protection) {
-        super(damage, health, money);
+    public Player(String name, Room room, int damage, int health, int money, int protection, boolean key) {
+        super(damage, health, money, key);
         this.name = name;
         this.room = room;
         this.protection = protection;
+        this.win = false;
     }
 
     public void lookAround() {

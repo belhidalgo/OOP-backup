@@ -31,8 +31,9 @@ public class Trap extends Door implements Interactable, Serializable {
     public void interact(Player player) {
         System.out.println("Oh no! The door you decided to cross is a trap!");
         player.setHealth(player.getHealth() - strength);
+        System.out.println(" -"+strength+" strength");
         if (player.getHealth() > 0) {
-            System.out.println("Congratulations! The Evil Door wasn't able to kill you!");
+            System.out.println("Wheww! You crossed the trap!");
             player.setRoomBehind(this);
         } else {
             System.out.println("You should be ashamed, you have been killed by a door!");

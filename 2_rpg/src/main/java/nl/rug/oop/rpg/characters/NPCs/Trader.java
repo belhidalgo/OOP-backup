@@ -24,9 +24,10 @@ public class Trader extends NPC implements Interactable, Serializable {
      * @param strength the strength the trader can inflict.
      * @param health the life of the trader.
      * @param money the money it has.
+     * @param key determines if the character has the key in its possession
      */
-    public Trader(String description, int strength, int health, int money) {
-        super(description, strength, health, money);
+    public Trader(String description, int strength, int health, int money, boolean  key) {
+        super(description, strength, health, money, key);
     }
 
     @Override
@@ -84,6 +85,7 @@ public class Trader extends NPC implements Interactable, Serializable {
         System.out.println("    (1) Some pretty nice jeans - 50 pennies");
         System.out.println("    (2) Rusty sword - 150 pennies");
         System.out.println("    (3) Funky purple fluid in a flask - 250 pennies");
+        System.out.println("(Money status: "+player.getMoney()+" pennies)");
         Scanner scanner = new Scanner(System.in);
         int choice = scan(scanner, -1, 3);
         switch (choice) {

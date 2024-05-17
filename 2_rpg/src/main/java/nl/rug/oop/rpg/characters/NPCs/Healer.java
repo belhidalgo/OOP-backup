@@ -24,9 +24,10 @@ public class Healer extends NPC implements Interactable, Serializable {
      * @param damage the strength the healer can inflict.
      * @param health the life of the healer.
      * @param money the money it has.
+     * @param key determines if the character has the key in its possession
      */
-    public Healer(String description, int damage, int health, int money) {
-        super(description, damage, health, money);
+    public Healer(String description, int damage, int health, int money, boolean key) {
+        super(description, damage, health, money, key);
     }
 
     @Override

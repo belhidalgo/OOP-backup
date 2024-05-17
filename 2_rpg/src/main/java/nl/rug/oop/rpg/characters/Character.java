@@ -21,4 +21,5 @@ public abstract class Character implements Serializable {
     private int strength;
     private int health;
     private int money;
+    private boolean key;
 }

@@ -26,9 +26,10 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
      * @param damage the strength the enemy can inflict.
      * @param health the life of the enemy.
      * @param money the money it has.
+     * @param key determines if the character has the key in its possession
      */
-    public Enemy(String description, int damage, int health, int money) {
-        super(description, damage, health, money);
+    public Enemy(String description, int damage, int health, int money, boolean key) {
+        super(description, damage, health, money, key);
     }
 
     @Override
@@ -66,10 +67,18 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
                         player.setMoney(player.getMoney() + getMoney());
                         System.out.println("You took the enemy's possessions." +
                                 " You've gained "+getMoney()+" pennies.");
+                        if (this.isKey()) {
+                            player.setKey(true);
+                            this.setKey(false);
+                        }
+                        System.out.println("You found a key!");
                         break;
                     }
                     System.out.println("You've wounded the enemy!  Enemy's health: " + getHealth());
                     attack(player);
+                    if (player.getHealth() <= 0) {
+                        break;
+                    }
                     System.out.println("The enemy fought back! (Health: " + player.getHealth() + ")");
                 }
             } else if (option == 1) {

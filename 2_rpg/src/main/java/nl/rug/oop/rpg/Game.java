@@ -81,8 +81,7 @@ public class Game implements Serializable {
         File saveGame = new File("savedGames/quicksave.ser");
         Files files = new Files(saveGame);
         Scanner scanner = new Scanner(System.in);
-        boolean win = false;
-        while (player.getHealth() > 0 || !win) {
+        while (player.getHealth() > 0 || player.isWin()) {
             printMenu();
             int option = scan(scanner, 0, 7);
             switch (option) {
