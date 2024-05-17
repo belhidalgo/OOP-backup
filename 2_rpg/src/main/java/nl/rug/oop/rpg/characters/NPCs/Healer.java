@@ -21,7 +21,7 @@ public class Healer extends NPC implements Interactable, Serializable {
     /**
      * New healer.
      * @param description the description of the healer.
-     * @param damage the damage the healer can inflict.
+     * @param damage the strength the healer can inflict.
      * @param health the life of the healer.
      * @param money the money it has.
      */
@@ -73,7 +73,7 @@ public class Healer extends NPC implements Interactable, Serializable {
     }
 
     /**
-     * Player chose to offer the healer some of its damage level.
+     * Player chose to offer the healer some of its strength level.
      * @param player is the player who chose the option 2.
      */
     private void optionStrength(Player player) {

@@ -18,17 +18,18 @@ public class Initialization {
         Room room1 = new Room("A rather dusty room full of computers.");
         Room room2 = new Room("A magically sparkling room with gold lights.");
         Room room3 = new Room("A pitch black space.");
+        Room room4 = new Room("A room with gold lights.");
 
         Door door = new Evil("A black door with a crack", room1, room2, 1, 3);
         Door door2 = new Trap("A mysterious red door", room3, room1, 2);
-        Door door3 = new Door("A rusty wooden door", room2, room1);
+        Door door3 = new Door("A rusty wooden door", room2, room3);
 
         room1.addDoor(door);
         room2.addDoor(door);
         room1.addDoor(door2);
         room3.addDoor(door2);
         room2.addDoor(door3);
-        room1.addDoor(door3);
+        room3.addDoor(door3);
 
         NPC char1 = new Enemy("A dancing cheery strawberry", 2, 10, 50);
         NPC char2 = new Healer("An odd looking dirty kobold", 1, 7, 100);

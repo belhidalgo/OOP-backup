@@ -11,7 +11,7 @@ import java.io.Serializable;
  * A trap door (subclass of door) that attacks the player.
  */
 public class Trap extends Door implements Interactable, Serializable {
-    private int damage;
+    private final int strength;
     @Serial
     private static final long serialVersionUID = 1;
 
@@ -20,17 +20,17 @@ public class Trap extends Door implements Interactable, Serializable {
      * @param description is the description of the door.
      * @param room1 is one of the rooms the door is connected to.
      * @param room2 is the other room connected to by the door.
-     * @param damage is the damage the room can inflict.
+     * @param strength is the strength the room can inflict.
      */
-    public Trap(String description, Room room1, Room room2, int damage) {
+    public Trap(String description, Room room1, Room room2, int strength) {
         super(description, room1, room2);
-        this.damage = damage;
+        this.strength = strength;
     }
 
     @Override
     public void interact(Player player) {
         System.out.println("Oh no! The door you decided to cross is a trap!");
-        player.setHealth(player.getHealth() - damage);
+        player.setHealth(player.getHealth() - strength);
         if (player.getHealth() > 0) {
             System.out.println("Congratulations! The Evil Door wasn't able to kill you!");
             player.setRoomBehind(this);

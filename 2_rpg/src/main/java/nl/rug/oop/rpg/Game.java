@@ -58,17 +58,17 @@ public class Game implements Serializable {
      */
     public static int scan(Scanner scanner, int lowerBound, int upperBound) {
         int option;
-        while (true) {
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                if (option >= lowerBound && option <= upperBound) {
-                    return option;
-                }
-                System.out.println("Invalid choice. Try again.");
-            } else {
-                System.out.println("Invalid character. Please enter a number.");
+        if (scanner.hasNextInt()) {
+            option = scanner.nextInt();
+            if (option >= lowerBound && option <= upperBound) {
+                return option;
             }
+            System.out.println("Invalid choice. Try again.");
+        } else {
+            System.out.println("Invalid character. Please enter a number.");
+            scanner.nextLine();
         }
+        return -2;
     }
 
     /**
@@ -87,7 +87,6 @@ public class Game implements Serializable {
             int option = scan(scanner, 0, 7);
             switch (option) {
                 case 0:
-                    System.out.println("You see: ");
                     player.lookAround();
                     break;
                 case 1:

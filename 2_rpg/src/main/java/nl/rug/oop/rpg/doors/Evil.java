@@ -20,7 +20,7 @@ import static nl.rug.oop.rpg.Game.scan;
 @Getter
 @Setter
 public class Evil extends Door implements Interactable, Attackable, Serializable {
-    private int damage;
+    private final int strength;
     private int health;
     @Serial
     private static final long serialVersionUID = 300;
@@ -30,18 +30,18 @@ public class Evil extends Door implements Interactable, Attackable, Serializable
      * @param description is the description of the door.
      * @param room1 is one of the rooms the door is connected to.
      * @param room2 is the other room connected to by the door.
-     * @param damage is the damage the room can inflict.
+     * @param strength is the strength the room can inflict.
      * @param health is the life the door has left.
      */
-    public Evil(String description, Room room1, Room room2, int damage, int health) {
+    public Evil(String description, Room room1, Room room2, int strength, int health) {
         super(description, room1, room2);
-        this.damage = damage;
+        this.strength = strength;
         this.health = health;
     }
 
     @Override
     public void attack(Character character) {
-        character.setHealth(character.getHealth() - damage);
+        character.setHealth(character.getHealth() - strength);
     }
 
     /**

@@ -17,7 +17,7 @@ public class Wizard extends NPC implements Interactable, Serializable {
     /**
      * New Wizard.
      * @param description the description of the wizard.
-     * @param damage the damage the wizard can inflict.
+     * @param damage the strength the wizard can inflict.
      * @param health the life of the wizard.
      * @param money the money it has.
      */

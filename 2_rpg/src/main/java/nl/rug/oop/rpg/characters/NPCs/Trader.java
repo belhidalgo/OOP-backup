@@ -21,7 +21,7 @@ public class Trader extends NPC implements Interactable, Serializable {
     /**
      * New Trader.
      * @param description the description of the trader.
-     * @param strength the damage the trader can inflict.
+     * @param strength the strength the trader can inflict.
      * @param health the life of the trader.
      * @param money the money it has.
      */

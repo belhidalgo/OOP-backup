@@ -30,7 +30,7 @@ public class Player extends Character implements Attackable, Serializable {
      * New Player.
      * @param name the name of the player.
      * @param room the room where the player is.
-     * @param damage the damage the player can inflict.
+     * @param damage the strength the player can inflict.
      * @param health the life of the player.
      * @param money the money it has.
      * @param protection the protection level of the player.
@@ -43,6 +43,7 @@ public class Player extends Character implements Attackable, Serializable {
     }
 
     public void lookAround() {
+        System.out.println("You see: ");
         room.inspect();
     }
 
@@ -64,7 +65,7 @@ public class Player extends Character implements Attackable, Serializable {
     }
 
     /**
-     * Print the current damage, health and money.
+     * Print the current strength, health and money.
      */
     public void printStatus() {
         System.out.println("Strength level: " + getStrength());
@@ -91,11 +92,15 @@ public class Player extends Character implements Attackable, Serializable {
                 npc = scanner.nextInt();
                 if (npc >= -1 && npc < room.getNPCs().size()) {
                     room.chooseNPC(npc, this);
-                    break;
+                    if (npc == -1) {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid choice. Try again.");
                 }
-                System.out.println("Invalid choice. Try again.");
             } else {
                 System.out.println("Invalid character. Please enter a number.");
+                scanner.nextLine();
             }
         }
 
@@ -121,6 +126,7 @@ public class Player extends Character implements Attackable, Serializable {
                 System.out.println("Invalid choice. Try again.");
             } else {
                 System.out.println("Invalid character. Please enter a number.");
+                scanner.nextLine();
             }
         }
     }

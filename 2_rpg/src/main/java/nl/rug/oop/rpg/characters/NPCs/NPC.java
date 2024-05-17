@@ -24,7 +24,7 @@ public abstract class NPC extends Character implements Inspectable, Interactable
     /**
      * New NPC.
      * @param description the description of the NPC.
-     * @param strength the damage the NPC can inflict.
+     * @param strength the strength the NPC can inflict.
      * @param health the life of the NPC.
      * @param money the money of the NPC.
      */

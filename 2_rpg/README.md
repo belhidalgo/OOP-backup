@@ -328,11 +328,11 @@ Don't forget that you can add methods to `Player` which can be called by, for ex
 
 **Requirements:**
 
-- `Player` should have damage and health.
-- All `NPC`s should have damage and health.
+- `Player` should have strength and health.
+- All `NPC`s should have strength and health.
 - Only `Player` and `Enemy` should be attackable.
-- The `Player` should be able to attack an `Enemy` and by doing this deal damage to that `Enemy`.
-- An `Enemy` should be able to attack the `Player` and by doing this deal damage to the `Player`.
+- The `Player` should be able to attack an `Enemy` and by doing this deal strength to that `Enemy`.
+- An `Enemy` should be able to attack the `Player` and by doing this deal strength to the `Player`.
 - The `Player` or an `NPC` should die when its health drops to or below 0.
 - The game stops when the `Player` dies. When the game stops, it should print something along the lines of "Game Over!".
 - A simple interaction menu for the combat. For example, when the `Player` interacts with an `Enemy` it should give the option to attack that enemy. The `Enemy` then attacks back etc.
@@ -354,7 +354,7 @@ Try to come up with another class that extends from `NPC`. Make sure it does som
 
 - A healer that heals the `Player`.
 - A trader that gives the `Player` an item (potentially in exchange for money).
-- A wizard that buffs the `Player` and permanently increases their damage.
+- A wizard that buffs the `Player` and permanently increases their strength.
 
 Note that, since `NPC` is now abstract, we no longer have to give a specific implementation of `interact()` and `inspect()` in `NPC`. The details of these methods are specific to the classes that extend from `NPC` and should therefore be implemented in those specific subclasses.
 

@@ -23,7 +23,7 @@ public class Enemy extends NPC implements Attackable, Interactable, Serializable
     /**
      * Create a new enemy.
      * @param description the description of the enemy.
-     * @param damage the damage the enemy can inflict.
+     * @param damage the strength the enemy can inflict.
      * @param health the life of the enemy.
      * @param money the money it has.
      */
