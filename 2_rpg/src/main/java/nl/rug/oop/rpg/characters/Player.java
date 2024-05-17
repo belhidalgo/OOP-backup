@@ -97,6 +97,8 @@ public class Player extends Character implements Attackable, Serializable {
                     room.chooseNPC(npc, this);
                     if (npc == -1) {
                         break;
+                    } else if (getHealth() <= 0) {
+                        break;
                     }
                 } else {
                     System.out.println("Invalid choice. Try again.");
