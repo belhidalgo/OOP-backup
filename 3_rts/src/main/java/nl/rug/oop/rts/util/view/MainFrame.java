@@ -34,7 +34,6 @@ public class MainFrame extends JFrame {
         JButton addEdge = new JButton("Add Route");
         JButton deleteEdge = new JButton("Delete Route");
 
-
         //add options to menu bar
         menuBar.add(addEdge);
         menuBar.add(addNode);
