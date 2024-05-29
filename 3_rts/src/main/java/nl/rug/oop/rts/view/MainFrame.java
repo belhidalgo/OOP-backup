@@ -1,6 +1,6 @@
-package nl.rug.oop.rts.util.view;
+package nl.rug.oop.rts.view;
 
-import nl.rug.oop.rts.util.model.Graph;
+import nl.rug.oop.rts.model.Graph;
 
 import javax.swing.*;
 import lombok.*;
@@ -41,6 +41,5 @@ public class MainFrame extends JFrame {
         menuBar.add(deleteNode);
 
         setJMenuBar(menuBar);
-
     }
 }

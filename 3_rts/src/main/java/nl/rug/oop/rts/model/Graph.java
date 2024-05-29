@@ -1,5 +1,6 @@
-package nl.rug.oop.rts.util.model;
+package nl.rug.oop.rts.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
 
@@ -10,11 +11,20 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Graph {
     private List<Node> nodes;
     private List<Edge> edges;
     private Node current;
+
+    /**
+     * New Graph.
+     * @param current - the node we are currently at.
+     */
+    public Graph(Node current) {
+        this.nodes = new ArrayList<>();
+        this.edges = new ArrayList<>();
+        this.current = current;
+    }
 
     /**
      * Add a node to the graph.

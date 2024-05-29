@@ -1,8 +1,11 @@
 package nl.rug.oop.rts.util;
 
-import nl.rug.oop.rts.util.model.Graph;
-import nl.rug.oop.rts.util.view.MainFrame;
+import nl.rug.oop.rts.model.Edge;
+import nl.rug.oop.rts.model.Graph;
+import nl.rug.oop.rts.model.Node;
+import nl.rug.oop.rts.view.MainFrame;
 import lombok.*;
+
 
 /**
  * Initialization class - to avoid initializing in
@@ -15,7 +18,13 @@ public class Initialization {
      * the main class.
      */
     public void initialize() {
-        Graph graph = new Graph();
+        Node node1 = new Node(1, 70, 70, "Mordor");
+        Node node2 = new Node(2, 500, 60, "Isengard");
+        Edge edge = new Edge(3, "path", node1, node2);
+        Graph graph = new Graph(node1);
+        graph.addNode(node1);
+        graph.addNode(node2);
+        graph.addEdge(edge);
         MainFrame frame = new MainFrame(graph);
         frame.setVisible(true);
     }

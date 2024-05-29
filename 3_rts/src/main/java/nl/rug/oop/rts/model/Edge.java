@@ -1,4 +1,4 @@
-package nl.rug.oop.rts.util.model;
+package nl.rug.oop.rts.model;
 
 import lombok.*;
 
