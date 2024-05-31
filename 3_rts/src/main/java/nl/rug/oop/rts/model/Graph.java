@@ -1,5 +1,6 @@
 package nl.rug.oop.rts.model;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
@@ -63,5 +64,23 @@ public class Graph {
         for (Edge edge : node.getEdges()) {
             removeEdge(edge);
         }
+    }
+
+    /**
+     * Gives the node in point point, and null if it doesn't exist.
+     * @param point the point where we want to get the node.
+     * @return the node in the given point.
+     */
+    public Node getSelectedNode(Point point) {
+        double x = point.getX();
+        double y = point.getY();
+
+        for (Node node : nodes) {
+            if ((x >= node.getX() && x <= (node.getX() + 70)) &&
+                    (y >= node.getY() && y <= (node.getY() + 70))) {
+                return node;
+            }
+        }
+        return null;
     }
 }
