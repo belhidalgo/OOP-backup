@@ -20,12 +20,14 @@ public class Initialization {
     public void initialize() {
         Node node1 = new Node(1, 70, 70, "Mordor");
         Node node2 = new Node(2, 500, 60, "Isengard");
-        Edge edge = new Edge(3, "path", node1, node2);
-        Graph graph = new Graph(node1);
+        Edge edge = new Edge(1, "path", node1, node2);
+        Graph graph = new Graph();
         graph.addNode(node1);
         graph.addNode(node2);
         graph.addEdge(edge);
         MainFrame frame = new MainFrame(graph);
+        graph.addObserver(frame.getPanel());
+        graph.addObserver(frame);
         frame.setVisible(true);
     }
 

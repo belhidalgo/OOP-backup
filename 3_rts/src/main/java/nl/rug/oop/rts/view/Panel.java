@@ -6,16 +6,16 @@ import nl.rug.oop.rts.controller.MouseControl;
 import nl.rug.oop.rts.model.Edge;
 import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Node;
+import nl.rug.oop.rts.observer.MapObserver;
 import nl.rug.oop.rts.util.TextureLoader;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 
 /**
  * Panel class.
  */
 @Getter
 @Setter
-public class Panel extends JPanel {
+public class Panel extends JPanel implements MapObserver {
     private Graph graph;
     private Image back;
 
@@ -28,6 +28,16 @@ public class Panel extends JPanel {
         this.graph = graph;
         MouseControl mouseControl = new MouseControl(graph);
         addMouseListener(mouseControl);
+        addMouseMotionListener(mouseControl);
+    }
+
+    /**
+     * Updates view based on changes made to model.
+     */
+    @Override
+    public void update(Graph graph) {
+        this.graph = graph;
+        repaint();
     }
 
     /**
@@ -36,6 +46,7 @@ public class Panel extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         g.drawImage(back, 0, 0, null);
 
@@ -52,10 +63,17 @@ public class Panel extends JPanel {
 
         //Draw nodes
         for (Node node : graph.getNodes()) {
-            Image image = TextureLoader.getInstance().getTexture("node4", 70, 70);
+            Image image;
+            if (node.isSelected()) {
+                image = TextureLoader.getInstance().getTexture("node3", 75, 75);
+            } else {
+                image = TextureLoader.getInstance().getTexture("node4", 70, 70);
+            }
             g.drawImage(image, node.getX(), node.getY(), null);
-            Font font = new Font("Ringbearer", Font.ITALIC, 16);
+            Font font = new Font("Serif", Font.BOLD | Font.ITALIC, 14);
             g.setFont(font);
+            /*JLabel label = new JLabel(node.getName());
+            label.setOpaque(true);*/
             g.drawString(node.getName(), node.getX() , node.getY() + 35);
         }
     }

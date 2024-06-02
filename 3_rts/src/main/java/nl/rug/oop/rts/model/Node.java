@@ -20,6 +20,7 @@ public class Node {
     private int y;
     private String name;
     private List<Edge> edges;
+    private boolean selected = false;
 
     /**
      * New node.

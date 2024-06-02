@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
+import nl.rug.oop.rts.observer.MapObservable;
+import nl.rug.oop.rts.observer.MapObserver;
 
 /**
  * Class that keeps track of all the nodes and edges.
@@ -12,19 +14,20 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Graph {
+public class Graph implements MapObservable {
     private List<Node> nodes;
     private List<Edge> edges;
+    private List<MapObserver> observers;
     private Node current;
 
     /**
      * New Graph.
-     * @param current - the node we are currently at.
      */
-    public Graph(Node current) {
+    public Graph() {
         this.nodes = new ArrayList<>();
         this.edges = new ArrayList<>();
-        this.current = current;
+        this.observers = new ArrayList<>();
+        this.current = null;
     }
 
     /**
@@ -33,6 +36,7 @@ public class Graph {
      */
     public void addNode(Node node) {
         nodes.add(node);
+        notifyObservers();
     }
 
     /**
@@ -43,6 +47,7 @@ public class Graph {
         edges.add(edge);
         edge.getNode1().getEdges().add(edge);
         edge.getNode2().getEdges().add(edge);
+        notifyObservers();
     }
 
     /**
@@ -53,6 +58,7 @@ public class Graph {
         edges.remove(edge);
         edge.getNode1().getEdges().remove(edge);
         edge.getNode2().getEdges().remove(edge);
+        notifyObservers();
     }
 
     /**
@@ -64,23 +70,46 @@ public class Graph {
         for (Edge edge : node.getEdges()) {
             removeEdge(edge);
         }
+        notifyObservers();
+    }
+
+    @Override
+    public void addObserver(MapObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(MapObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (MapObserver observer : observers) {
+            observer.update(this);
+        }
     }
 
     /**
      * Gives the node in point point, and null if it doesn't exist.
      * @param point the point where we want to get the node.
-     * @return the node in the given point.
      */
-    public Node getSelectedNode(Point point) {
+    public void getSelectedNode(Point point) {
         double x = point.getX();
         double y = point.getY();
 
-        for (Node node : nodes) {
-            if ((x >= node.getX() && x <= (node.getX() + 70)) &&
-                    (y >= node.getY() && y <= (node.getY() + 70))) {
-                return node;
+        if (current != null) {
+            current.setSelected(false);
+            current = null;
+        } else {
+            for (Node node : nodes) {
+                if ((x >= node.getX() && x <= (node.getX() + 70)) &&
+                        (y >= node.getY() && y <= (node.getY() + 70))) {
+                    node.setSelected(true);
+                    current = node;
+                }
             }
         }
-        return null;
+        notifyObservers();
     }
 }

@@ -17,16 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MouseControl extends MouseAdapter {
-    private Node node;
     private Graph graph;
-
-    /**
-     * New mouse control.
-     * @param graph - the graph we want it to work with.
-     */
-    public MouseControl(Graph graph) {
-        this.graph = graph;
-    }
 
     /**
      * The mouse has been clicked.
@@ -35,11 +26,25 @@ public class MouseControl extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         Point point = e.getPoint();
-        Node node1 = graph.getSelectedNode(point);
-        if (node1 != null) {
-            node = node1;
-            System.out.println("Node " + node.getId() + " selected");
+        graph.getSelectedNode(point);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (graph.getCurrent() != null) {
+            Node moving = graph.getCurrent();
+            moving.setX(e.getX() - 35);
+            moving.setY(e.getY() - 35);
+            graph.notifyObservers();
         }
     }
 
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (graph.getCurrent() != null) {
+            graph.getCurrent().setSelected(false);
+            graph.setCurrent(null);
+            graph.notifyObservers();
+        }
+    }
 }

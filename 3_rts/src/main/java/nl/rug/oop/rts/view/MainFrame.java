@@ -4,14 +4,16 @@ import nl.rug.oop.rts.model.Graph;
 
 import javax.swing.*;
 import lombok.*;
+import nl.rug.oop.rts.observer.MapObserver;
 
 /**
  * Main frame class.
  */
 @Getter
 @Setter
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements MapObserver {
     private Graph graph;
+    private Panel panel;
 
     /**
      * Creates a new frame for a given graph.
@@ -22,7 +24,7 @@ public class MainFrame extends JFrame {
         setName("Map of Middle-Earth");
         setLocationRelativeTo(null);
 
-        Panel panel = new Panel(graph);
+        this.panel = new Panel(graph);
         add(panel);
 
         //Create menu bar
@@ -41,5 +43,10 @@ public class MainFrame extends JFrame {
         menuBar.add(deleteNode);
 
         setJMenuBar(menuBar);
+    }
+
+    @Override
+    public void update(Graph graph) {
+        this.graph = graph;
     }
 }
