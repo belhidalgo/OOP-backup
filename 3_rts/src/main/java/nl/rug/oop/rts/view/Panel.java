@@ -74,7 +74,9 @@ public class Panel extends JPanel implements MapObserver {
             g.setFont(font);
             /*JLabel label = new JLabel(node.getName());
             label.setOpaque(true);*/
-            g.drawString(node.getName(), node.getX() , node.getY() + 35);
+            int width = g.getFontMetrics().stringWidth(node.getName());
+            int startX = node.getX() - width/2;
+            g.drawString(node.getName(), startX + 35 , node.getY() + 35);
         }
     }
 
