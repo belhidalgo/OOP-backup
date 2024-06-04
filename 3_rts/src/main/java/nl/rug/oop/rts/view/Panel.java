@@ -8,6 +8,7 @@ import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Node;
 import nl.rug.oop.rts.observer.MapObserver;
 import nl.rug.oop.rts.util.TextureLoader;
+
 import java.awt.*;
 
 /**
@@ -35,8 +36,7 @@ public class Panel extends JPanel implements MapObserver {
      * Updates view based on changes made to model.
      */
     @Override
-    public void update(Graph graph) {
-        this.graph = graph;
+    public void update() {
         repaint();
     }
 
@@ -48,6 +48,7 @@ public class Panel extends JPanel implements MapObserver {
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+        g.setColor(Color.BLACK);
         g.drawImage(back, 0, 0, null);
 
         //Draw edges
@@ -72,8 +73,6 @@ public class Panel extends JPanel implements MapObserver {
             g.drawImage(image, node.getX(), node.getY(), null);
             Font font = new Font("Serif", Font.BOLD | Font.ITALIC, 14);
             g.setFont(font);
-            /*JLabel label = new JLabel(node.getName());
-            label.setOpaque(true);*/
             int width = g.getFontMetrics().stringWidth(node.getName());
             int startX = node.getX() - width/2;
             g.drawString(node.getName(), startX + 35 , node.getY() + 35);

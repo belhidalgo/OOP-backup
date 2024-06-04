@@ -13,5 +13,4 @@ import lombok.*;
 public class MapController {
     private Graph graph;
 
-
 }

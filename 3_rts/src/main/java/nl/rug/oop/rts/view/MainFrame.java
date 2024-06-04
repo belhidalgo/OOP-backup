@@ -6,6 +6,8 @@ import javax.swing.*;
 import lombok.*;
 import nl.rug.oop.rts.observer.MapObserver;
 
+import static com.formdev.flatlaf.FlatLaf.updateUI;
+
 /**
  * Main frame class.
  */
@@ -14,6 +16,7 @@ import nl.rug.oop.rts.observer.MapObserver;
 public class MainFrame extends JFrame implements MapObserver {
     private Graph graph;
     private Panel panel;
+    private Menu menu;
 
     /**
      * Creates a new frame for a given graph.
@@ -27,26 +30,16 @@ public class MainFrame extends JFrame implements MapObserver {
         this.panel = new Panel(graph);
         add(panel);
 
-        //Create menu bar
-        JMenuBar menuBar = new JMenuBar();
+        this.menu = new Menu(graph);
+        setJMenuBar(menu);
 
-        //Create the buttons for the menu bar
-        JButton addNode = new JButton("Add Location");
-        JButton deleteNode = new JButton("Delete Location");
-        JButton addEdge = new JButton("Add Route");
-        JButton deleteEdge = new JButton("Delete Route");
-
-        //add options to menu bar
-        menuBar.add(addEdge);
-        menuBar.add(addNode);
-        menuBar.add(deleteEdge);
-        menuBar.add(deleteNode);
-
-        setJMenuBar(menuBar);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     @Override
-    public void update(Graph graph) {
-        this.graph = graph;
+    public void update() {
+        repaint();
+        updateUI();
     }
 }

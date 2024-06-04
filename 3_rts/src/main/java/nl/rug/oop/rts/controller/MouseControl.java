@@ -14,10 +14,13 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class MouseControl extends MouseAdapter {
     private Graph graph;
+
+    public MouseControl(Graph graph) {
+        this.graph = graph;
+    }
 
     /**
      * The mouse has been clicked.
@@ -27,6 +30,11 @@ public class MouseControl extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         Point point = e.getPoint();
         graph.getSelectedNode(point);
+        /*if (graph.getCurrent() != null) {
+            removeNode.setEnabled(true);
+        } else {
+            removeNode.setEnabled(false);
+        }*/
     }
 
     @Override
@@ -47,4 +55,5 @@ public class MouseControl extends MouseAdapter {
             graph.notifyObservers();
         }
     }
+
 }

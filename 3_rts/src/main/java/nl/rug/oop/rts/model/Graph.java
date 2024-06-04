@@ -19,6 +19,8 @@ public class Graph implements MapObservable {
     private List<Edge> edges;
     private List<MapObserver> observers;
     private Node current;
+    private Edge currentEdge;
+    private int nodeId;
 
     /**
      * New Graph.
@@ -28,6 +30,7 @@ public class Graph implements MapObservable {
         this.edges = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.current = null;
+        this.currentEdge = null;
     }
 
     /**
@@ -55,9 +58,9 @@ public class Graph implements MapObservable {
      * @param edge - the edge we want to remove.
      */
     public void removeEdge(Edge edge) {
-        edges.remove(edge);
         edge.getNode1().getEdges().remove(edge);
         edge.getNode2().getEdges().remove(edge);
+        edges.remove(edge);
         notifyObservers();
     }
 
@@ -67,9 +70,11 @@ public class Graph implements MapObservable {
      */
     public void removeNode(Node node) {
         nodes.remove(node);
-        for (Edge edge : node.getEdges()) {
+        List<Edge> edgesToRemove = new ArrayList<>(node.getEdges());
+        for (Edge edge : edgesToRemove) {
             removeEdge(edge);
         }
+        current = null;
         notifyObservers();
     }
 
@@ -86,13 +91,13 @@ public class Graph implements MapObservable {
     @Override
     public void notifyObservers() {
         for (MapObserver observer : observers) {
-            observer.update(this);
+            observer.update();
         }
     }
 
     /**
-     * Gives the node in point point, and null if it doesn't exist.
-     * @param point the point where we want to get the node.
+     * Sets current as the node in point point, and null if it doesn't exist.
+     * @param point - the point where we want to get the node.
      */
     public void getSelectedNode(Point point) {
         double x = point.getX();
@@ -107,6 +112,31 @@ public class Graph implements MapObservable {
                         (y >= node.getY() && y <= (node.getY() + 70))) {
                     node.setSelected(true);
                     current = node;
+                }
+            }
+        }
+        notifyObservers();
+    }
+
+    /**
+     * Sets currentEdge as the edge in point point, and null if it doesn't exist.
+     * @param point -
+     */
+    public void getSelectedEdge(Point point) {
+        double x = point.getX();
+        double y = point.getY();
+
+        if (currentEdge != null) {
+            currentEdge.setSelected(false);
+            currentEdge = null;
+        } else {
+            for (Edge edge : edges) {
+                int m = ((edge.getNode2().getY() - edge.getNode1().getY())
+                        / (edge.getNode2().getX() - edge.getNode1().getX()));
+                int c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
+                if (y == m * x + c) {
+                    edge.setSelected(true);
+                    currentEdge = edge;
                 }
             }
         }

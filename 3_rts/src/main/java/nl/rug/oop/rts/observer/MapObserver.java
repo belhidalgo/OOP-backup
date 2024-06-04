@@ -1,10 +1,13 @@
 package nl.rug.oop.rts.observer;
 
-import nl.rug.oop.rts.model.Graph;
-
 /**
  * The view.
  */
 public interface MapObserver {
-    void update(Graph graph);
+
+    void update();
+
+    default void observe(MapObservable observable) {
+        observable.addObserver(this);
+    }
 }

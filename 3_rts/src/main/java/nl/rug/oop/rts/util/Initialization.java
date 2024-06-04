@@ -26,8 +26,9 @@ public class Initialization {
         graph.addNode(node2);
         graph.addEdge(edge);
         MainFrame frame = new MainFrame(graph);
-        graph.addObserver(frame.getPanel());
         graph.addObserver(frame);
+        graph.addObserver(frame.getPanel());
+        graph.addObserver(frame.getMenu());
         frame.setVisible(true);
     }
 

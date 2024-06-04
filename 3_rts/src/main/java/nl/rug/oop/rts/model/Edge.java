@@ -17,4 +17,19 @@ public class Edge {
     private String name;
     private Node node1;
     private Node node2;
+    private boolean selected = false;
+
+    /**
+     * Create a new edge.
+     * @param id - id of the edge.
+     * @param path - name of the edge.
+     * @param node1 - first node it connects.
+     * @param node2 - second node it connects.
+     */
+    public Edge(int id, String path, Node node1, Node node2) {
+        this.id = id;
+        this.name = path;
+        this.node1 = node1;
+        this.node2 = node2;
+    }
 }
