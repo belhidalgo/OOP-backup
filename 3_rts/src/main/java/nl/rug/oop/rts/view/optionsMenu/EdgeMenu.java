@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * EdgeMenu class (to display the different options within an edge).
+ */
 @Setter
 @Getter
 public class EdgeMenu extends OptionMenu {
@@ -16,6 +19,10 @@ public class EdgeMenu extends OptionMenu {
     private JTextField node1Field;
     private JTextField node2Field;
 
+    /**
+     * New EdgeMenu.
+     * @param graph - the graph for which we want to create the menu.
+     */
     public EdgeMenu(Graph graph) {
         super(graph);
         //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -49,6 +56,10 @@ public class EdgeMenu extends OptionMenu {
         add(node2Field);
     }
 
+    /**
+     * Update the Edge Menu.
+     * @param g the <code>Graphics</code> object to protect.
+     */
     public void paintComponent(Graphics g) {
         Edge current = getGraph().getCurrentEdge();
         nameField.setText(current.getName());

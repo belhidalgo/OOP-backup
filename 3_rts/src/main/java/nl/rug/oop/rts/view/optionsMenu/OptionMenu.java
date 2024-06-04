@@ -8,6 +8,10 @@ import java.awt.*;
 
 import lombok.*;
 
+/**
+ * OptionMenu class (to display the different options).
+ */
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -17,10 +21,18 @@ public class OptionMenu extends JPanel implements MapObserver {
     private NodeMenu nodeMenu = null;
     private EdgeMenu edgeMenu = null;
 
+    /**
+     * New OptionMenu.
+     * @param graph - the graph for which we want to create the option menu.
+     */
     public OptionMenu(Graph graph) {
         this.graph = graph;
     }
 
+    /**
+     * Draw the Menu.
+     * @param g the <code>Graphics</code> object to protect.
+     */
     public void paintComponent(Graphics g) {
         setBackground(Color.DARK_GRAY);
         g.getFont().deriveFont(20.0f);
@@ -34,6 +46,9 @@ public class OptionMenu extends JPanel implements MapObserver {
         }
     }
 
+    /**
+     * Update the menu.
+     */
     @Override
     public void update() {
         if (nodeMenu != null) {

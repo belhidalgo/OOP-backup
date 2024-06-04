@@ -1,7 +1,6 @@
 package nl.rug.oop.rts.controller.button;
 
 import nl.rug.oop.rts.model.Graph;
-import nl.rug.oop.rts.model.Node;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -29,7 +28,6 @@ public class AddEdge extends Button{
             @Override
             public void actionPerformed(ActionEvent e) {
                 graph.setAddEdge(true);
-                //System.out.println(graph.getCurrent().getName());
             }
         });
         return button;

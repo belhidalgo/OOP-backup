@@ -8,9 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * NodeMenu class (to display the different options within a node).
+ */
 public class NodeMenu extends OptionMenu {
-    JTextField nameField;
+    private JTextField nameField;
 
+    /**
+     * New EdgeMenu.
+     * @param graph - the graph for which we want to create the menu.
+     */
     public NodeMenu(Graph graph) {
         super(graph);
         this.nameField = new JTextField(graph.getCurrent().getName(), 15);
@@ -27,6 +34,10 @@ public class NodeMenu extends OptionMenu {
         add(nameField);
     }
 
+    /**
+     * Update the menu.
+     * @param g the <code>Graphics</code> object to protect.
+     */
     public void paintComponent(Graphics g) {
         Node current = getGraph().getCurrent();
         nameField.setText(current.getName());

@@ -141,6 +141,11 @@ public class Graph implements MapObservable {
         notifyObservers();
     }
 
+    /**
+     * Get the node in point point.
+     * @param point - the point we want to get the node from.
+     * @return the node in the given point.
+     */
     public Node getNodeAtPoint(Point point) {
         double x = point.getX();
         double y = point.getY();

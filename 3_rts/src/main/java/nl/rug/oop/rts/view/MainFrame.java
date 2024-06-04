@@ -7,8 +7,6 @@ import lombok.*;
 import nl.rug.oop.rts.observer.MapObserver;
 import nl.rug.oop.rts.view.optionsMenu.OptionMenu;
 
-import static com.formdev.flatlaf.FlatLaf.updateUI;
-
 /**
  * Main frame class.
  */
