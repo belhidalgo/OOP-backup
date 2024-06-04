@@ -5,6 +5,7 @@ import nl.rug.oop.rts.model.Graph;
 import javax.swing.*;
 import lombok.*;
 import nl.rug.oop.rts.observer.MapObserver;
+import nl.rug.oop.rts.view.optionsMenu.OptionMenu;
 
 import static com.formdev.flatlaf.FlatLaf.updateUI;
 
@@ -16,6 +17,7 @@ import static com.formdev.flatlaf.FlatLaf.updateUI;
 public class MainFrame extends JFrame implements MapObserver {
     private Graph graph;
     private Panel panel;
+    private OptionMenu options;
     private Menu menu;
 
     /**
@@ -23,12 +25,20 @@ public class MainFrame extends JFrame implements MapObserver {
      * @param graph - the graph we want to draw.
      */
     public MainFrame(Graph graph) {
-        setSize(800, 600);
+        setSize(1000, 600);
         setName("Map of Middle-Earth");
         setLocationRelativeTo(null);
 
         this.panel = new Panel(graph);
         add(panel);
+
+        this.options = new OptionMenu(graph);
+        add(options);
+
+        JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, options, panel);
+        sl.setDividerLocation(200);
+
+        add(sl);
 
         this.menu = new Menu(graph);
         setJMenuBar(menu);
@@ -40,6 +50,6 @@ public class MainFrame extends JFrame implements MapObserver {
     @Override
     public void update() {
         repaint();
-        updateUI();
+        //updateUI();
     }
 }

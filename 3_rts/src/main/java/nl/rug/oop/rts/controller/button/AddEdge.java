@@ -1,15 +1,17 @@
 package nl.rug.oop.rts.controller.button;
 
 import nl.rug.oop.rts.model.Graph;
+import nl.rug.oop.rts.model.Node;
 
 import javax.swing.*;
+import java.awt.event.*;
 
 /**
  * AddEdge Button (creates an edge between the selected node
  * and the one selected afterwards).
  */
 
-public class AddEdge extends Button {
+public class AddEdge extends Button{
 
     /**
      * Create a JButton that creates a route.
@@ -23,13 +25,14 @@ public class AddEdge extends Button {
         if (graph.getCurrent() == null) {
             button.setEnabled(false);
         }
-        /*button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (graph.getCurrent() != null) {
-                }
+                graph.setAddEdge(true);
+                //System.out.println(graph.getCurrent().getName());
             }
-        });*/
+        });
         return button;
     }
+
 }

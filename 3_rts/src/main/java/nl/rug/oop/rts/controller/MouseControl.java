@@ -1,5 +1,6 @@
 package nl.rug.oop.rts.controller;
 
+import nl.rug.oop.rts.model.Edge;
 import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Node;
 
@@ -29,12 +30,30 @@ public class MouseControl extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         Point point = e.getPoint();
-        graph.getSelectedNode(point);
-        /*if (graph.getCurrent() != null) {
-            removeNode.setEnabled(true);
+        //System.out.println(graph.getCurrent().getName());
+        if (graph.isAddEdge()) {
+            Node node1 = graph.getCurrent();
+            Node node2 = graph.getNodeAtPoint(point);
+            if (node2 != null) {
+                Edge edge = new Edge(graph.getEdges().size() + 1, "Way from " + node1.getName() +
+                        " to " + node2.getName(), node1, node2);
+                edge.setNode2(node2);
+                graph.addEdge(edge);
+            }
+            graph.setAddEdge(false);
+            graph.getCurrent().setSelected(false);
+            graph.setCurrent(null);
         } else {
-            removeNode.setEnabled(false);
-        }*/
+            if (graph.getCurrentEdge() != null && graph.getCurrentEdge().isSelected()) {
+                graph.getCurrentEdge().setSelected(false);
+                graph.setCurrentEdge(null);
+            }
+            graph.getSelectedNode(point);
+            if (graph.getCurrent() == null) {
+                graph.getSelectedEdge(point);
+            }
+            graph.notifyObservers();
+        }
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Graph implements MapObservable {
     private Node current;
     private Edge currentEdge;
     private int nodeId;
+    private boolean addEdge;
 
     /**
      * New Graph.
@@ -31,6 +32,7 @@ public class Graph implements MapObservable {
         this.observers = new ArrayList<>();
         this.current = null;
         this.currentEdge = null;
+        this.addEdge = false;
     }
 
     /**
@@ -61,6 +63,7 @@ public class Graph implements MapObservable {
         edge.getNode1().getEdges().remove(edge);
         edge.getNode2().getEdges().remove(edge);
         edges.remove(edge);
+        currentEdge = null;
         notifyObservers();
     }
 
@@ -100,19 +103,14 @@ public class Graph implements MapObservable {
      * @param point - the point where we want to get the node.
      */
     public void getSelectedNode(Point point) {
-        double x = point.getX();
-        double y = point.getY();
-
         if (current != null) {
             current.setSelected(false);
             current = null;
         } else {
-            for (Node node : nodes) {
-                if ((x >= node.getX() && x <= (node.getX() + 70)) &&
-                        (y >= node.getY() && y <= (node.getY() + 70))) {
-                    node.setSelected(true);
-                    current = node;
-                }
+            Node node = getNodeAtPoint(point);
+            if (node != null) {
+                current = node;
+                current.setSelected(true);
             }
         }
         notifyObservers();
@@ -131,15 +129,28 @@ public class Graph implements MapObservable {
             currentEdge = null;
         } else {
             for (Edge edge : edges) {
-                int m = ((edge.getNode2().getY() - edge.getNode1().getY())
-                        / (edge.getNode2().getX() - edge.getNode1().getX()));
-                int c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
-                if (y == m * x + c) {
+                double m = ((double)(edge.getNode2().getY() - edge.getNode1().getY())
+                        / (double)(edge.getNode2().getX() - edge.getNode1().getX()));
+                double c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
+                if ((y < m * x + c + 5) && (y > m * x + c - 5)) {
                     edge.setSelected(true);
                     currentEdge = edge;
                 }
             }
         }
         notifyObservers();
+    }
+
+    public Node getNodeAtPoint(Point point) {
+        double x = point.getX();
+        double y = point.getY();
+
+        for (Node node : nodes) {
+            if ((x >= node.getX() && x <= (node.getX() + 70)) &&
+                    (y >= node.getY() && y <= (node.getY() + 70))) {
+                return node;
+            }
+        }
+        return null;
     }
 }

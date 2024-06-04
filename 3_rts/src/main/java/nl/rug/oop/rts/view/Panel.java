@@ -30,6 +30,7 @@ public class Panel extends JPanel implements MapObserver {
         MouseControl mouseControl = new MouseControl(graph);
         addMouseListener(mouseControl);
         addMouseMotionListener(mouseControl);
+
     }
 
     /**
@@ -54,7 +55,11 @@ public class Panel extends JPanel implements MapObserver {
         //Draw edges
         for (Edge edge : graph.getEdges()) {
             Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.BLACK);
+            if (edge.isSelected()) {
+                g2.setColor(Color.BLUE);
+            } else {
+                g2.setColor(Color.BLACK);
+            }
             float[] dashes = {10.0f};
             g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
                     10.0f, dashes, 0.0f));
@@ -65,6 +70,7 @@ public class Panel extends JPanel implements MapObserver {
         //Draw nodes
         for (Node node : graph.getNodes()) {
             Image image;
+            g.setColor(Color.BLACK);
             if (node.isSelected()) {
                 image = TextureLoader.getInstance().getTexture("node3", 75, 75);
             } else {
