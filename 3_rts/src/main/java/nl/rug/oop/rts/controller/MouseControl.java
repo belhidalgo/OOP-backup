@@ -30,7 +30,7 @@ public class MouseControl extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         Point point = e.getPoint();
-        //System.out.println(graph.getCurrent().getName());
+        System.out.println(graph.getCurrent());
         if (graph.isAddEdge()) {
             Node node1 = graph.getCurrent();
             Node node2 = graph.getNodeAtPoint(point);
@@ -53,6 +53,7 @@ public class MouseControl extends MouseAdapter {
                 graph.getSelectedEdge(point);
             }
             graph.notifyObservers();
+            System.out.println(graph.getCurrent());
         }
     }
 

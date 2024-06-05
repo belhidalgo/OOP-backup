@@ -14,7 +14,6 @@ import lombok.*;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class OptionMenu extends JPanel implements MapObserver {
     private Graph graph;
@@ -41,9 +40,31 @@ public class OptionMenu extends JPanel implements MapObserver {
 
         } else if (graph.getCurrentEdge() != null) {
             edgeMenu.paintComponent(g);
+            //new EdgeMenu(graph).paintComponent(g);
         } else  {
             nodeMenu.paintComponent(g);
+            //NodeMenu(graph).paintComponent(g);
         }
+    }
+
+    /**
+     * Create a new JTextField with the action depending on whether a node or an edge is selected.
+     * @param text - the text we want to appear in the text field.
+     * @return - the new text field.
+     */
+    protected JTextField createTextField(String text) {
+        JTextField textField = new JTextField(text, 15);
+        textField.setBackground(Color.LIGHT_GRAY);
+        textField.setForeground(Color.BLACK);
+        textField.addActionListener(e -> {
+            if (graph.getCurrent() != null) {
+                graph.getCurrent().setName(textField.getText());
+            } else {
+                graph.getCurrentEdge().setName(textField.getText());
+            }
+            graph.notifyObservers();
+        });
+        return textField;
     }
 
     /**
@@ -65,5 +86,6 @@ public class OptionMenu extends JPanel implements MapObserver {
             edgeMenu = new EdgeMenu(graph);
             add(edgeMenu);
         }
+        repaint();
     }
 }

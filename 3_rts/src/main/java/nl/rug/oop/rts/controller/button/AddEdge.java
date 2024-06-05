@@ -28,6 +28,8 @@ public class AddEdge extends Button{
             @Override
             public void actionPerformed(ActionEvent e) {
                 graph.setAddEdge(true);
+                System.out.println(graph.getCurrent().getName());
+                graph.notifyObservers();
             }
         });
         return button;
