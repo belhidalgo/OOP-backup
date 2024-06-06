@@ -13,4 +13,6 @@ import lombok.*;
 public class MapController {
     private Graph graph;
 
+    //Fix equation edges
+
 }

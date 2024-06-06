@@ -84,6 +84,5 @@ public class OptionMenu extends JPanel implements MapObserver {
             edgeMenu = new EdgeMenu(graph);
             add(edgeMenu);
         }
-        //repaint();
     }
 }

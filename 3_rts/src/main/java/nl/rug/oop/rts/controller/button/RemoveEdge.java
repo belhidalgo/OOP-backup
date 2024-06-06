@@ -20,7 +20,7 @@ public class RemoveEdge extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (graph.getCurrentEdge() != null && graph.getCurrentEdge().isSelected()) {
+                if (graph.getCurrentEdge() != null) {
                     button.setEnabled(true);
                     graph.removeEdge(graph.getCurrentEdge());
                 }

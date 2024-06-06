@@ -20,7 +20,7 @@ public class RemoveNode extends Button {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (graph.getCurrent() != null && graph.getCurrent().isSelected()) {
+                if (graph.getCurrent() != null) {
                     button.setEnabled(true);
                     graph.removeNode(graph.getCurrent());
                 }

@@ -23,7 +23,6 @@ public class EdgeMenu extends OptionMenu {
      */
     public EdgeMenu(Graph graph) {
         super(graph);
-        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         nameField = createTextField(graph.getCurrentEdge().getName());
         node1Field = createTextField(graph.getCurrentEdge().getNode1().getName());
         node2Field = createTextField(graph.getCurrentEdge().getNode2().getName());

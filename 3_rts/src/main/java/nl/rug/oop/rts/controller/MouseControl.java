@@ -18,6 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 public class MouseControl extends MouseAdapter {
     private Graph graph;
+    private boolean isDragged = false;
 
     public MouseControl(Graph graph) {
         this.graph = graph;
@@ -30,7 +31,6 @@ public class MouseControl extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         Point point = e.getPoint();
-        //System.out.println(graph.getCurrent());
         if (graph.isAddEdge()) {
             Node node1 = graph.getCurrent();
             Node node2 = graph.getNodeAtPoint(point);
@@ -41,15 +41,17 @@ public class MouseControl extends MouseAdapter {
                 graph.addEdge(edge);
             }
             graph.setAddEdge(false);
-            graph.getCurrent().setSelected(false);
             graph.setCurrent(null);
         } else {
-            if (graph.getCurrentEdge() != null && graph.getCurrentEdge().isSelected()) {
-                graph.getCurrentEdge().setSelected(false);
+            if (graph.getCurrentEdge() != null) {
                 graph.setCurrentEdge(null);
             }
+            boolean isSelected = false;
+            if (graph.getCurrent() != null) {
+                isSelected = true;
+            }
             graph.selectNode(point);
-            if (graph.getCurrent() == null) {
+            if (graph.getCurrent() == null && !isSelected) {
                 graph.selectEdge(point);
             }
         }
@@ -58,6 +60,7 @@ public class MouseControl extends MouseAdapter {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        setDragged(true);
         if (graph.getCurrent() != null) {
             Node moving = graph.getCurrent();
             moving.setX(e.getX() - 35);
@@ -68,11 +71,9 @@ public class MouseControl extends MouseAdapter {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (graph.getCurrent() != null) {
-            graph.getCurrent().setSelected(false);
-            if (!graph.isAddEdge()) {
-                graph.setCurrent(null);
-            }
+        if (graph.getCurrent() != null && !graph.isAddEdge() && isDragged) {
+            graph.setCurrent(null);
+            setDragged(false);
             graph.notifyObservers();
         }
     }

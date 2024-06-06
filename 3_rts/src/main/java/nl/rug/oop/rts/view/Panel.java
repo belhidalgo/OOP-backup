@@ -55,7 +55,7 @@ public class Panel extends JPanel implements MapObserver {
         //Draw edges
         for (Edge edge : graph.getEdges()) {
             Graphics2D g2 = (Graphics2D) g;
-            if (edge.isSelected()) {
+            if (edge == graph.getCurrentEdge()) {
                 g2.setColor(Color.BLUE);
             } else {
                 g2.setColor(Color.BLACK);
@@ -71,7 +71,7 @@ public class Panel extends JPanel implements MapObserver {
         for (Node node : graph.getNodes()) {
             Image image;
             g.setColor(Color.BLACK);
-            if (node.isSelected()) {
+            if (node == graph.getCurrent()) {
                 image = TextureLoader.getInstance().getTexture("node3", 75, 75);
             } else {
                 image = TextureLoader.getInstance().getTexture("node4", 70, 70);

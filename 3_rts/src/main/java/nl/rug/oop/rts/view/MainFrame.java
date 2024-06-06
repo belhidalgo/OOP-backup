@@ -48,6 +48,5 @@ public class MainFrame extends JFrame implements MapObserver {
     @Override
     public void update() {
         repaint();
-        //updateUI();
     }
 }

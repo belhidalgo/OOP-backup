@@ -37,9 +37,23 @@ public class Graph implements MapObservable {
         this.addEdge = false;
     }
 
+    /**
+     * Set the selected node to current.
+     * @param current - the node we want to select.
+     */
     public void setCurrent(Node current) {
         System.out.println("Set node to " + current);
         this.current = current;
+        notifyObservers();
+    }
+
+    /**
+     * Set the selected edge to currentEdge.
+     * @param currentEdge - the edge we want to select.
+     */
+    public void setCurrentEdge(Edge currentEdge) {
+        this.currentEdge = currentEdge;
+        notifyObservers();
     }
 
     /**
@@ -70,7 +84,7 @@ public class Graph implements MapObservable {
         edge.getNode1().getEdges().remove(edge);
         edge.getNode2().getEdges().remove(edge);
         edges.remove(edge);
-        currentEdge = null;
+        setCurrentEdge(null);
         notifyObservers();
     }
 
@@ -85,7 +99,6 @@ public class Graph implements MapObservable {
             removeEdge(edge);
         }
         setCurrent(null);
-        notifyObservers();
     }
 
     @Override
@@ -110,18 +123,13 @@ public class Graph implements MapObservable {
      * @param point - the point where we want to get the node.
      */
     public void selectNode(Point point) {
-        if (current != null) {
-            current.setSelected(false);
+        Node node = getNodeAtPoint(point);
+        if (current != null && node == current) {
             System.out.println("Selected node: " + point);
             setCurrent(null);
         } else {
-            Node node = getNodeAtPoint(point);
-            if (node != null) {
-                setCurrent(node);
-                current.setSelected(true);
-            }
+            setCurrent(node);
         }
-        notifyObservers();
     }
 
     /**
@@ -133,15 +141,13 @@ public class Graph implements MapObservable {
         double y = point.getY();
 
         if (currentEdge != null) {
-            currentEdge.setSelected(false);
-            currentEdge = null;
+            setCurrentEdge(null);
         } else {
             for (Edge edge : edges) {
                 double m = ((double)(edge.getNode2().getY() - edge.getNode1().getY())
                         / (double)(edge.getNode2().getX() - edge.getNode1().getX()));
                 double c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
                 if ((y < m * x + c + 5) && (y > m * x + c - 5)) {
-                    edge.setSelected(true);
                     currentEdge = edge;
                 }
             }
