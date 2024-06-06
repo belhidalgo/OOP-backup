@@ -18,6 +18,8 @@ public class Graph implements MapObservable {
     private List<Node> nodes;
     private List<Edge> edges;
     private List<MapObserver> observers;
+
+    @Setter(AccessLevel.NONE)
     private Node current;
     private Edge currentEdge;
     private int nodeId;
@@ -33,6 +35,11 @@ public class Graph implements MapObservable {
         this.current = null;
         this.currentEdge = null;
         this.addEdge = false;
+    }
+
+    public void setCurrent(Node current) {
+        System.out.println("Set node to " + current);
+        this.current = current;
     }
 
     /**
@@ -77,7 +84,7 @@ public class Graph implements MapObservable {
         for (Edge edge : edgesToRemove) {
             removeEdge(edge);
         }
-        current = null;
+        setCurrent(null);
         notifyObservers();
     }
 
@@ -102,14 +109,15 @@ public class Graph implements MapObservable {
      * Sets current as the node in point point, and null if it doesn't exist.
      * @param point - the point where we want to get the node.
      */
-    public void getSelectedNode(Point point) {
+    public void selectNode(Point point) {
         if (current != null) {
             current.setSelected(false);
-            current = null;
+            System.out.println("Selected node: " + point);
+            setCurrent(null);
         } else {
             Node node = getNodeAtPoint(point);
             if (node != null) {
-                current = node;
+                setCurrent(node);
                 current.setSelected(true);
             }
         }
@@ -120,7 +128,7 @@ public class Graph implements MapObservable {
      * Sets currentEdge as the edge in point point, and null if it doesn't exist.
      * @param point -
      */
-    public void getSelectedEdge(Point point) {
+    public void selectEdge(Point point) {
         double x = point.getX();
         double y = point.getY();
 

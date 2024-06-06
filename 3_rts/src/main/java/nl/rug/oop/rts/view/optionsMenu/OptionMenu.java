@@ -40,10 +40,8 @@ public class OptionMenu extends JPanel implements MapObserver {
 
         } else if (graph.getCurrentEdge() != null) {
             edgeMenu.paintComponent(g);
-            //new EdgeMenu(graph).paintComponent(g);
         } else  {
             nodeMenu.paintComponent(g);
-            //NodeMenu(graph).paintComponent(g);
         }
     }
 
@@ -86,6 +84,6 @@ public class OptionMenu extends JPanel implements MapObserver {
             edgeMenu = new EdgeMenu(graph);
             add(edgeMenu);
         }
-        repaint();
+        //repaint();
     }
 }
