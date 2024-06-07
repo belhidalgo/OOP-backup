@@ -51,8 +51,11 @@ public class Panel extends JPanel implements MapObserver {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         g.drawImage(back, 0, 0, null);
+        drawEdges(g);
+        drawNodes(g);
+    }
 
-        //Draw edges
+    private void drawEdges(Graphics g) {
         for (Edge edge : graph.getEdges()) {
             Graphics2D g2 = (Graphics2D) g;
             if (edge == graph.getCurrentEdge()) {
@@ -63,11 +66,12 @@ public class Panel extends JPanel implements MapObserver {
             float[] dashes = {10.0f};
             g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
                     10.0f, dashes, 0.0f));
-            g2.drawLine(edge.getNode1().getX() + 35 , edge.getNode1().getY() + 35,
+            g2.drawLine(edge.getNode1().getX() + 35, edge.getNode1().getY() + 35,
                     edge.getNode2().getX() + 35, edge.getNode2().getY() + 35);
         }
+    }
 
-        //Draw nodes
+    private void drawNodes(Graphics g) {
         for (Node node : graph.getNodes()) {
             Image image;
             g.setColor(Color.BLACK);

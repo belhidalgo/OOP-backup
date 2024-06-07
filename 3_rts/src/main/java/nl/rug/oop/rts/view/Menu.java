@@ -11,6 +11,7 @@ import nl.rug.oop.rts.observer.MapObserver;
  */
 public class Menu extends JMenuBar implements MapObserver {
     private Graph graph;
+    private JButton addNode;
     private JButton addEdge;
     private JButton removeNode;
     private JButton removeEdge;
@@ -21,17 +22,25 @@ public class Menu extends JMenuBar implements MapObserver {
      */
     public Menu(Graph graph) {
         this.graph = graph;
-        JButton newButton = new AddNode().executeButton("Add Location", graph);
-        add(newButton);
 
-        removeNode = new RemoveNode().executeButton("Delete Location", graph);
+        addNode = new JButton("Add Location");
+        addNode.addActionListener(new AddNodeListener(graph));
+        add(addNode);
+
+        removeNode = new JButton("Delete Location");
+        removeNode.addActionListener(new RemoveNodeListener(graph));
         add(removeNode);
+        removeNode.setEnabled(false);
 
-        addEdge = new AddEdge().executeButton("Add Route", graph);
+        addEdge = new JButton("Add Route");
+        addEdge.addActionListener(new AddEdgeListener(graph));
         add(addEdge);
+        addEdge.setEnabled(false);
 
-        removeEdge = new RemoveEdge().executeButton("Delete Route", graph);
+        removeEdge = new JButton("Delete Route");
+        removeEdge.addActionListener(new RemoveEdgeListener(graph));
         add(removeEdge);
+        removeEdge.setEnabled(false);
     }
 
     @Override

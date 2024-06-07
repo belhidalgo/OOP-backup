@@ -40,6 +40,7 @@ public class OptionMenu extends JPanel implements MapObserver {
 
         } else if (graph.getCurrentEdge() != null) {
             edgeMenu.paintComponent(g);
+
         } else  {
             nodeMenu.paintComponent(g);
         }

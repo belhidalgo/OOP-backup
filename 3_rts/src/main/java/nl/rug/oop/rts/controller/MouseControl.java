@@ -18,10 +18,12 @@ import lombok.*;
 @NoArgsConstructor
 public class MouseControl extends MouseAdapter {
     private Graph graph;
+    private MapController mapController;
     private boolean isDragged = false;
 
     public MouseControl(Graph graph) {
         this.graph = graph;
+        this.mapController = new MapController(graph);
     }
 
     /**
@@ -33,7 +35,7 @@ public class MouseControl extends MouseAdapter {
         Point point = e.getPoint();
         if (graph.isAddEdge()) {
             Node node1 = graph.getCurrent();
-            Node node2 = graph.getNodeAtPoint(point);
+            Node node2 = mapController.getNodeAtPoint(point);
             if (node2 != null) {
                 Edge edge = new Edge(graph.getEdges().size() + 1, "Way from " + node1.getName() +
                         " to " + node2.getName(), node1, node2);
@@ -50,9 +52,9 @@ public class MouseControl extends MouseAdapter {
             if (graph.getCurrent() != null) {
                 isSelected = true;
             }
-            graph.selectNode(point);
+            mapController.selectNode(point);
             if (graph.getCurrent() == null && !isSelected) {
-                graph.selectEdge(point);
+                mapController.selectEdge(point);
             }
         }
         graph.notifyObservers();
@@ -61,6 +63,7 @@ public class MouseControl extends MouseAdapter {
     @Override
     public void mouseDragged(MouseEvent e) {
         setDragged(true);
+        graph.setCurrent(mapController.getNodeAtPoint(e.getPoint()));
         if (graph.getCurrent() != null) {
             Node moving = graph.getCurrent();
             moving.setX(e.getX() - 35);

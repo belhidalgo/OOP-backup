@@ -42,7 +42,6 @@ public class Graph implements MapObservable {
      * @param current - the node we want to select.
      */
     public void setCurrent(Node current) {
-        System.out.println("Set node to " + current);
         this.current = current;
         notifyObservers();
     }
@@ -116,60 +115,5 @@ public class Graph implements MapObservable {
         for (MapObserver observer : observers) {
             observer.update();
         }
-    }
-
-    /**
-     * Sets current as the node in point point, and null if it doesn't exist.
-     * @param point - the point where we want to get the node.
-     */
-    public void selectNode(Point point) {
-        Node node = getNodeAtPoint(point);
-        if (current != null && node == current) {
-            System.out.println("Selected node: " + point);
-            setCurrent(null);
-        } else {
-            setCurrent(node);
-        }
-    }
-
-    /**
-     * Sets currentEdge as the edge in point point, and null if it doesn't exist.
-     * @param point -
-     */
-    public void selectEdge(Point point) {
-        double x = point.getX();
-        double y = point.getY();
-
-        if (currentEdge != null) {
-            setCurrentEdge(null);
-        } else {
-            for (Edge edge : edges) {
-                double m = ((double)(edge.getNode2().getY() - edge.getNode1().getY())
-                        / (double)(edge.getNode2().getX() - edge.getNode1().getX()));
-                double c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
-                if ((y < m * x + c + 5) && (y > m * x + c - 5)) {
-                    currentEdge = edge;
-                }
-            }
-        }
-        notifyObservers();
-    }
-
-    /**
-     * Get the node in point point.
-     * @param point - the point we want to get the node from.
-     * @return the node in the given point.
-     */
-    public Node getNodeAtPoint(Point point) {
-        double x = point.getX();
-        double y = point.getY();
-
-        for (Node node : nodes) {
-            if ((x >= node.getX() && x <= (node.getX() + 70)) &&
-                    (y >= node.getY() && y <= (node.getY() + 70))) {
-                return node;
-            }
-        }
-        return null;
     }
 }
