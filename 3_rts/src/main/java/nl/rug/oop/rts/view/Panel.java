@@ -8,6 +8,7 @@ import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Node;
 import nl.rug.oop.rts.observer.MapObserver;
 import nl.rug.oop.rts.util.TextureLoader;
+import nl.rug.oop.rts.util.Value;
 
 import java.awt.*;
 
@@ -25,7 +26,8 @@ public class Panel extends JPanel implements MapObserver {
      * @param graph - the graph we want the Panel to have access to.
      */
     public Panel(Graph graph) {
-        back = TextureLoader.getInstance().getTexture("mapLotr", 800, 600);
+        back = TextureLoader.getInstance().getTexture("mapLotr", Value.PANELWIDTH.getValue(),
+                Value.FRAMEHEIGHT.getValue(), true);
         this.graph = graph;
         MouseControl mouseControl = new MouseControl(graph);
         addMouseListener(mouseControl);
@@ -50,7 +52,7 @@ public class Panel extends JPanel implements MapObserver {
 
         super.paintComponent(g);
         g.setColor(Color.BLACK);
-        g.drawImage(back, 0, 0, null);
+        g.drawImage(back, Value.START.getValue(), Value.START.getValue(), null);
         drawEdges(g);
         drawNodes(g);
     }
@@ -63,9 +65,9 @@ public class Panel extends JPanel implements MapObserver {
             } else {
                 g2.setColor(Color.BLACK);
             }
-            float[] dashes = {10.0f};
-            g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
-                    10.0f, dashes, 0.0f));
+            float[] dashes = {Value.DASHES.getValue()};
+            g2.setStroke(new BasicStroke(Value.STROKEWIDTH.getValue(), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
+                    Value.DASHES.getValue(), dashes, Value.START.getValue()));
             g2.drawLine(edge.getNode1().getX() + 35, edge.getNode1().getY() + 35,
                     edge.getNode2().getX() + 35, edge.getNode2().getY() + 35);
         }
@@ -76,12 +78,14 @@ public class Panel extends JPanel implements MapObserver {
             Image image;
             g.setColor(Color.BLACK);
             if (node == graph.getCurrent()) {
-                image = TextureLoader.getInstance().getTexture("node3", 75, 75);
+                image = TextureLoader.getInstance().getTexture("node3", Value.SELECTEDNODESIZE.getValue(),
+                        Value.SELECTEDNODESIZE.getValue());
             } else {
-                image = TextureLoader.getInstance().getTexture("node4", 70, 70);
+                image = TextureLoader.getInstance().getTexture("node4", Value.NODESIZE.getValue(),
+                        Value.NODESIZE.getValue());
             }
             g.drawImage(image, node.getX(), node.getY(), null);
-            Font font = new Font("Serif", Font.BOLD | Font.ITALIC, 14);
+            Font font = new Font("Serif", Font.BOLD | Font.ITALIC, Value.FONTSIZE.getValue());
             g.setFont(font);
             int width = g.getFontMetrics().stringWidth(node.getName());
             int startX = node.getX() - width/2;

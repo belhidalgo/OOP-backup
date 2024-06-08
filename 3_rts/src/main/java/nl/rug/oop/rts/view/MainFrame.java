@@ -5,6 +5,7 @@ import nl.rug.oop.rts.model.Graph;
 import javax.swing.*;
 import lombok.*;
 import nl.rug.oop.rts.observer.MapObserver;
+import nl.rug.oop.rts.util.Value;
 import nl.rug.oop.rts.view.optionsMenu.OptionMenu;
 
 /**
@@ -23,7 +24,7 @@ public class MainFrame extends JFrame implements MapObserver {
      * @param graph - the graph we want to draw.
      */
     public MainFrame(Graph graph) {
-        setSize(1000, 600);
+        setSize(Value.FRAMEWIDTH.getValue(), Value.FRAMEHEIGHT.getValue());
         setName("Map of Middle-Earth");
         setLocationRelativeTo(null);
 
@@ -34,7 +35,7 @@ public class MainFrame extends JFrame implements MapObserver {
         add(options);
 
         JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, options, panel);
-        sl.setDividerLocation(200);
+        sl.setDividerLocation(Value.DIVIDERLOCATION.getValue());
 
         add(sl);
 
