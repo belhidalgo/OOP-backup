@@ -2,6 +2,7 @@ package nl.rug.oop.rts.view.optionsMenu;
 
 import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.observer.MapObserver;
+import nl.rug.oop.rts.util.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,9 +35,9 @@ public class OptionMenu extends JPanel implements MapObserver {
      */
     public void paintComponent(Graphics g) {
         setBackground(Color.DARK_GRAY);
-        g.getFont().deriveFont(20.0f);
+        g.getFont().deriveFont((float) Value.FONTSIZE2.getValue());
         if (graph.getCurrent() == null && graph.getCurrentEdge() == null) {
-            g.drawString("Nothing selected", 10, 20);
+            g.drawString("Nothing selected", Value.PANELSTRINGX.getValue(), Value.PANELSTRINGY.getValue());
 
         } else if (graph.getCurrentEdge() != null) {
             edgeMenu.paintComponent(g);
@@ -52,7 +53,7 @@ public class OptionMenu extends JPanel implements MapObserver {
      * @return - the new text field.
      */
     protected JTextField createTextField(String text) {
-        JTextField textField = new JTextField(text, 15);
+        JTextField textField = new JTextField(text, Value.COLUMNSTEXTFIELD.getValue());
         textField.setBackground(Color.LIGHT_GRAY);
         textField.setForeground(Color.BLACK);
         textField.addActionListener(e -> {

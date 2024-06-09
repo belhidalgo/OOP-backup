@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import lombok.*;
+import nl.rug.oop.rts.util.Value;
 
 /**
  * Action listener for the Add Node button.
@@ -21,8 +22,10 @@ public class AddNodeListener implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         String input = JOptionPane.showInputDialog(null, "Enter city name: ");
+        graph.setAddEdge(false);
         if (input != null) {
-            Node city = new Node(graph.getNodeId() + 1, 5, 5, input);
+            Node city = new Node(graph.getNodeId() + 1, Value.STARTNEWNODE.getValue(),
+                    Value.STARTNEWNODE.getValue(), input);
             graph.setNodeId(graph.getNodeId() + 1);
             graph.addNode(city);
         }

@@ -63,8 +63,13 @@ public class MouseControl extends MouseAdapter {
     @Override
     public void mouseDragged(MouseEvent e) {
         setDragged(true);
-        graph.setCurrent(mapController.getNodeAtPoint(e.getPoint()));
+        if (graph.getCurrent() == null) {
+            graph.setCurrent(mapController.getNodeAtPoint(e.getPoint()));
+        }
         if (graph.getCurrent() != null) {
+            if (graph.getCurrentEdge() != null) {
+                graph.setCurrentEdge(null);
+            }
             Node moving = graph.getCurrent();
             moving.setX(e.getX() - 35);
             moving.setY(e.getY() - 35);
@@ -80,5 +85,4 @@ public class MouseControl extends MouseAdapter {
             graph.notifyObservers();
         }
     }
-
 }

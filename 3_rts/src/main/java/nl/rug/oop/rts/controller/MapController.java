@@ -19,7 +19,7 @@ public class MapController {
 
     /**
      * Sets currentEdge as the edge in point point, and null if it doesn't exist.
-     * @param point -
+     * @param point - the point where we want to check if there is an edge.
      */
     public void selectEdge(Point point) {
         double x = point.getX();
@@ -32,9 +32,14 @@ public class MapController {
                 double m = ((double)(edge.getNode2().getY() - edge.getNode1().getY())
                         / (double)(edge.getNode2().getX() - edge.getNode1().getX()));
                 double c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
-                if ((y < m * x + c + 5) && (y > m * x + c - 5)
+                /*double yAprox = m * clickedX + c;
+                double xAprox = (clickedY - c) / m;
+                if (yAprox < clickedY + 5 && yAprox > clickedY - 5 && xAprox < clickedX + 5 && xAprox > clickedX - 5) {
+                    graph.setCurrentEdge(edge);
+                }*/
+                if (((y < m * x + c + 5) && (y > m * x + c - 5)) || ((x < (y - c)/2 + 5) && (x > (y - c)/2 - 5)))
                         /*&& Math.min(edge.getNode1().getX(),edge.getNode2().getX()) - 5 <= x
-                        && x <= Math.max(edge.getNode1().getX(),edge.getNode2().getX()) + 5)*/) {
+                        && x <= Math.max(edge.getNode1().getX(),edge.getNode2().getX()) + 5*/ {
                     graph.setCurrentEdge(edge);
                 }
             }

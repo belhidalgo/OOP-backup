@@ -3,6 +3,7 @@ package nl.rug.oop.rts.view.optionsMenu;
 import lombok.*;
 import nl.rug.oop.rts.model.Edge;
 import nl.rug.oop.rts.model.Graph;
+import nl.rug.oop.rts.util.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,7 @@ public class EdgeMenu extends OptionMenu {
         node1Field.setEditable(false);
         node2Field.setEditable(false);
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 1));
+        panel.setLayout(new GridLayout(Value.ROWSLAYOUT.getValue(), Value.COLSLAYOUT.getValue()));
         panel.add(nameField);
         panel.add(node1Field);
         panel.add(node2Field);

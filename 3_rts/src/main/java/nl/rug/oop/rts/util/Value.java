@@ -11,10 +11,16 @@ public enum Value {
     NODESIZE(70),
     SELECTEDNODESIZE(75),
     FONTSIZE(14),
+    FONTSIZE2(20),
     START(0),
     STARTNEWNODE(5),
     DASHES(10),
-    STROKEWIDTH(2);
+    STROKEWIDTH(2),
+    PANELSTRINGX(10),
+    PANELSTRINGY(20),
+    COLUMNSTEXTFIELD(15),
+    ROWSLAYOUT(3),
+    COLSLAYOUT(1);
 
     private int num;
 

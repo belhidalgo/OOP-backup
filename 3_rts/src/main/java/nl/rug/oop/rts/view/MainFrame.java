@@ -8,6 +8,8 @@ import nl.rug.oop.rts.observer.MapObserver;
 import nl.rug.oop.rts.util.Value;
 import nl.rug.oop.rts.view.optionsMenu.OptionMenu;
 
+import java.awt.*;
+
 /**
  * Main frame class.
  */
