@@ -1,9 +1,9 @@
 package nl.rug.oop.rts.model;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
+import nl.rug.oop.rts.armies.Army;
 import nl.rug.oop.rts.observer.MapObservable;
 import nl.rug.oop.rts.observer.MapObserver;
 
@@ -18,8 +18,6 @@ public class Graph implements MapObservable {
     private List<Node> nodes;
     private List<Edge> edges;
     private List<MapObserver> observers;
-
-    @Setter(AccessLevel.NONE)
     private Node current;
     private Edge currentEdge;
     private int nodeId;
@@ -98,6 +96,28 @@ public class Graph implements MapObservable {
             removeEdge(edge);
         }
         setCurrent(null);
+    }
+
+    /**
+     * Add an army to the current node of the graph.
+     * @param army - the army we want to add.
+     */
+    public void addArmy(Army army) {
+        if (current != null) {
+            current.getArmies().add(army);
+        }
+        notifyObservers();
+    }
+
+    /**
+     * Remove an army from the current node of the graph.
+     * @param army - the army we want to remove.
+     */
+    public void removeArmy(Army army) {
+        if (current != null) {
+            current.getArmies().remove(army);
+        }
+        notifyObservers();
     }
 
     @Override

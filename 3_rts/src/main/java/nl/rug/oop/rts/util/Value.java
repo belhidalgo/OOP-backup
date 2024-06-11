@@ -4,12 +4,13 @@ package nl.rug.oop.rts.util;
  * Enum class to store the initialization numbers (to avoid magic numbers).
  */
 public enum Value {
-    FRAMEHEIGHT(600),
-    FRAMEWIDTH(1000),
-    PANELWIDTH(800),
+    FRAMEHEIGHT(1000),
+    FRAMEWIDTH(1400),
+    PANELWIDTH(1200),
     DIVIDERLOCATION(200),
-    NODESIZE(70),
-    SELECTEDNODESIZE(75),
+    NODESIZE(90),
+    SELECTEDNODESIZE(95),
+    ARMYSIZE(35),
     FONTSIZE(14),
     FONTSIZE2(20),
     START(0),

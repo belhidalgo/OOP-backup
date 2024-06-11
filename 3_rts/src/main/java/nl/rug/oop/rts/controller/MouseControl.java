@@ -45,6 +45,7 @@ public class MouseControl extends MouseAdapter {
             graph.setAddEdge(false);
             graph.setCurrent(null);
         } else {
+            Edge current = graph.getCurrentEdge();
             if (graph.getCurrentEdge() != null) {
                 graph.setCurrentEdge(null);
             }
@@ -54,7 +55,7 @@ public class MouseControl extends MouseAdapter {
             }
             mapController.selectNode(point);
             if (graph.getCurrent() == null && !isSelected) {
-                mapController.selectEdge(point);
+                mapController.selectEdge(point, current);
             }
         }
         graph.notifyObservers();
@@ -71,8 +72,8 @@ public class MouseControl extends MouseAdapter {
                 graph.setCurrentEdge(null);
             }
             Node moving = graph.getCurrent();
-            moving.setX(e.getX() - 35);
-            moving.setY(e.getY() - 35);
+            moving.setX(e.getX() - 45);
+            moving.setY(e.getY() - 45);
             graph.notifyObservers();
         }
     }

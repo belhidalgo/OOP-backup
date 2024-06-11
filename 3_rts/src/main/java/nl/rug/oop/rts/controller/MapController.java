@@ -7,6 +7,9 @@ import nl.rug.oop.rts.model.Node;
 
 import java.awt.*;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
+
 /**
  * Controller - get the user's input and use the model to handle that input.
  */
@@ -20,26 +23,22 @@ public class MapController {
     /**
      * Sets currentEdge as the edge in point point, and null if it doesn't exist.
      * @param point - the point where we want to check if there is an edge.
+     * @param current - current edge that is selected.
      */
-    public void selectEdge(Point point) {
+    public void selectEdge(Point point, Edge current) {
         double x = point.getX();
         double y = point.getY();
 
-        if (graph.getCurrentEdge() != null) {
-            graph.setCurrentEdge(null);
-        } else {
-            for (Edge edge : graph.getEdges()) {
-                double m = ((double)(edge.getNode2().getY() - edge.getNode1().getY())
-                        / (double)(edge.getNode2().getX() - edge.getNode1().getX()));
-                double c = (edge.getNode1().getY() + 35) - m*(edge.getNode1().getX() + 35);
-                /*double yAprox = m * clickedX + c;
-                double xAprox = (clickedY - c) / m;
-                if (yAprox < clickedY + 5 && yAprox > clickedY - 5 && xAprox < clickedX + 5 && xAprox > clickedX - 5) {
-                    graph.setCurrentEdge(edge);
-                }*/
-                if (((y < m * x + c + 5) && (y > m * x + c - 5)) || ((x < (y - c)/2 + 5) && (x > (y - c)/2 - 5)))
-                        /*&& Math.min(edge.getNode1().getX(),edge.getNode2().getX()) - 5 <= x
-                        && x <= Math.max(edge.getNode1().getX(),edge.getNode2().getX()) + 5*/ {
+        for (Edge edge : graph.getEdges()) {
+            double m = ((double)(edge.getNode2().getY() - edge.getNode1().getY())
+                    / (double)(edge.getNode2().getX() - edge.getNode1().getX()));
+            double c = (edge.getNode1().getY() + 45) - m*(edge.getNode1().getX() + 45);
+            if (abs(m*x - y + c) / sqrt(Math.pow(m, 2) + 1) < 5
+                    && Math.min(edge.getNode1().getX(), edge.getNode2().getX()) + 40 <= x
+                    && x <= Math.max(edge.getNode1().getX(),edge.getNode2().getX()) + 50
+                    && Math.min(edge.getNode1().getY(), edge.getNode2().getY()) + 40 <= y
+                    && y <= Math.max(edge.getNode1().getY(),edge.getNode2().getY()) + 50) {
+                if (current == null || current != edge) {
                     graph.setCurrentEdge(edge);
                 }
             }
@@ -70,8 +69,8 @@ public class MapController {
         double y = point.getY();
 
         for (Node node : graph.getNodes()) {
-            if ((x >= node.getX() && x <= (node.getX() + 70)) &&
-                    (y >= node.getY() && y <= (node.getY() + 70))) {
+            if ((x >= node.getX() && x <= (node.getX() + 90)) &&
+                    (y >= node.getY() && y <= (node.getY() + 90))) {
                 return node;
             }
         }
