@@ -28,6 +28,6 @@ public class AddArmyListener implements ActionListener {
         Object selection = JOptionPane.showInputDialog(null, "Choose a faction", "Input",
                 JOptionPane.INFORMATION_MESSAGE, null, Faction.values(), null);
         Army army = new Army((Faction) selection);
-        graph.addArmy(army);
+        graph.addArmyNode(army, graph.getCurrent());
     }
 }

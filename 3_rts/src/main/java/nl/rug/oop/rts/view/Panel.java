@@ -3,6 +3,7 @@ package nl.rug.oop.rts.view;
 import javax.swing.*;
 import lombok.*;
 import nl.rug.oop.rts.armies.Army;
+import nl.rug.oop.rts.armies.Faction;
 import nl.rug.oop.rts.controller.MouseControl;
 import nl.rug.oop.rts.model.Edge;
 import nl.rug.oop.rts.model.Graph;
@@ -57,6 +58,7 @@ public class Panel extends JPanel implements MapObserver {
         drawEdges(g);
         drawNodes(g);
         drawArmyNode(g);
+        drawArmyEdge(g);
     }
 
     private void drawEdges(Graphics g) {
@@ -100,30 +102,7 @@ public class Panel extends JPanel implements MapObserver {
             int pos1 = 0;
             int pos2 = 0;
             for (Army army : node.getArmies()) {
-                Image image = null;
-                g.setColor(Color.BLACK);
-                switch (army.getFaction()) {
-                    case MEN -> {
-                        image = TextureLoader.getInstance().getTexture("factionMen", Value.ARMYSIZE.getValue(),
-                                Value.ARMYSIZE.getValue());
-                    }
-                    case DWARVES -> {
-                        image = TextureLoader.getInstance().getTexture("factionDwarves", Value.ARMYSIZE.getValue(),
-                                Value.ARMYSIZE.getValue());
-                    }
-                    case ELVES -> {
-                        image = TextureLoader.getInstance().getTexture("factionElves", Value.ARMYSIZE.getValue(),
-                                Value.ARMYSIZE.getValue());
-                    }
-                    case ISENGARD -> {
-                        image = TextureLoader.getInstance().getTexture("factionIsengard", Value.ARMYSIZE.getValue(),
-                                Value.ARMYSIZE.getValue());
-                    }
-                    case MORDOR -> {
-                        image = TextureLoader.getInstance().getTexture("factionMordor", Value.ARMYSIZE.getValue(),
-                                Value.ARMYSIZE.getValue());
-                    }
-                }
+                Image image = chooseFaction(army.getFaction());
                 if (army.getTeam() == 1) {
                     g.drawImage(image, node.getX() - 45 + pos1, node.getY() - 13, null);
                     pos1 = pos1 + 12;
@@ -136,4 +115,41 @@ public class Panel extends JPanel implements MapObserver {
         }
     }
 
+    private void drawArmyEdge(Graphics g) {
+        for (Edge edge : graph.getEdges()) {
+            int x = (edge.getNode1().getX() + edge.getNode2().getX() + 90) / 2 + 20;
+            int y = (edge.getNode1().getY() + edge.getNode2().getY() + 90) / 2 + 20;
+            for (Army army : edge.getArmies()) {
+                Image image = chooseFaction(army.getFaction());
+                g.drawImage(image, x, y, null);
+            }
+        }
+    }
+
+    private Image chooseFaction(Faction faction) {
+        Image image = null;
+        switch (faction) {
+            case MEN -> {
+                image = TextureLoader.getInstance().getTexture("factionMen", Value.ARMYSIZE.getValue(),
+                        Value.ARMYSIZE.getValue());
+            }
+            case DWARVES -> {
+                image = TextureLoader.getInstance().getTexture("factionDwarves", Value.ARMYSIZE.getValue(),
+                        Value.ARMYSIZE.getValue());
+            }
+            case ELVES -> {
+                image = TextureLoader.getInstance().getTexture("factionElves", Value.ARMYSIZE.getValue(),
+                        Value.ARMYSIZE.getValue());
+            }
+            case ISENGARD -> {
+                image = TextureLoader.getInstance().getTexture("factionIsengard", Value.ARMYSIZE.getValue(),
+                        Value.ARMYSIZE.getValue());
+            }
+            case MORDOR -> {
+                image = TextureLoader.getInstance().getTexture("factionMordor", Value.ARMYSIZE.getValue(),
+                        Value.ARMYSIZE.getValue());
+            }
+        }
+        return image;
+    }
 }

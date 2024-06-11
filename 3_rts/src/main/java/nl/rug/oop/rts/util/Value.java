@@ -10,7 +10,7 @@ public enum Value {
     DIVIDERLOCATION(200),
     NODESIZE(90),
     SELECTEDNODESIZE(95),
-    ARMYSIZE(35),
+    ARMYSIZE(40),
     FONTSIZE(14),
     FONTSIZE2(20),
     START(0),

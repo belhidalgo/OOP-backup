@@ -41,6 +41,10 @@ public class Menu extends JMenuBar implements MapObserver {
         removeEdge.addActionListener(new RemoveEdgeListener(graph));
         add(removeEdge);
         removeEdge.setEnabled(false);
+
+        JButton timeStep = new JButton("Simulation Step");
+        timeStep.addActionListener(new TimeStepListener(graph));
+        add(timeStep);
     }
 
     @Override

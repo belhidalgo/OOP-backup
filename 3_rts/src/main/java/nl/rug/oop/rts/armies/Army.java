@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import lombok.*;
+import nl.rug.oop.rts.model.Edge;
+import nl.rug.oop.rts.model.Node;
 
 /**
  * Class of the armies.
@@ -18,6 +20,8 @@ public class Army {
     private int numUnits;
     private List<Unit> units;
     private int team;
+    private Node node;
+    private Edge edge;
 
     /**
      * Create a new army.
@@ -35,7 +39,8 @@ public class Army {
                 this.team = 2;
             }
         }
-
+        this.node = null;
+        this.edge = null;
         this.units = new ArrayList<>();
         for (int i = 0; i < numUnits; i++) {
             Unit unit = new Unit(faction.getUnitNames().get(random.nextInt(0, 2)), faction);

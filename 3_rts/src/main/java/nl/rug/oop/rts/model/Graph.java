@@ -101,22 +101,42 @@ public class Graph implements MapObservable {
     /**
      * Add an army to the current node of the graph.
      * @param army - the army we want to add.
+     * @param node - adds the army to the list of this node.
      */
-    public void addArmy(Army army) {
-        if (current != null) {
-            current.getArmies().add(army);
-        }
+    public void addArmyNode(Army army, Node node) {
+        node.getArmies().add(army);
+        army.setNode(node);
         notifyObservers();
     }
 
     /**
      * Remove an army from the current node of the graph.
      * @param army - the army we want to remove.
+     * @param node - removes the army from this node.
      */
-    public void removeArmy(Army army) {
-        if (current != null) {
-            current.getArmies().remove(army);
-        }
+    public void removeArmyNode(Army army, Node node) {
+        node.getArmies().remove(army);
+        notifyObservers();
+    }
+
+    /**
+     * Adds an army to the list of armies of the edge.
+     * @param army - the army we want to add.
+     * @param edge - army is added to this edge.
+     */
+    public void addArmyEdge(Army army, Edge edge) {
+        edge.getArmies().add(army);
+        army.setEdge(edge);
+        notifyObservers();
+    }
+
+    /**
+     * Removes an army from the edge.
+     * @param army - the army we want to remove.
+     * @param edge - army is removed from this edge.
+     */
+    public void removeArmyEdge(Army army, Edge edge) {
+        edge.getArmies().remove(army);
         notifyObservers();
     }
 
