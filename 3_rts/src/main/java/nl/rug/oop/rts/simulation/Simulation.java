@@ -6,9 +6,8 @@ import nl.rug.oop.rts.model.Graph;
 import lombok.*;
 import nl.rug.oop.rts.model.Node;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import javax.swing.*;
+import java.util.*;
 
 /**
  * Class responsible for the simulations.
@@ -22,6 +21,7 @@ public class Simulation {
     /**
      * Armies step from node over to the edges.
      */
+    //SwingUtilities.invokeAndWait()
     public void step() {
         Random random = new Random();
         List<Army> checkedArmies = new ArrayList<>();
@@ -52,6 +52,78 @@ public class Simulation {
             }
             for (Army army : armiesToRemove) {
                 graph.removeArmyEdge(army, edge);
+            }
+        }
+    }
+
+    private List<Army> checkArmy(List<Army> armies, int chosenTeam) {
+        ArrayList<Army> team = new ArrayList<>();
+        for (Army army : armies) {
+            if (army.getTeam() == chosenTeam) {
+                team.add(army);
+            }
+        }
+        return team;
+    }
+
+    /*private void fight(Graph graph, boolean isNode) {
+        if (isNode) {
+            List<Edge> iteration = graph.getEdges();
+        } else {
+            List<Node> iteration = graph.getNodes();
+        }
+        for ()
+    }*/
+
+    public void battle() {
+        for (Node node : graph.getNodes()) {
+            List<Army> team1 = checkArmy(node.getArmies(), 1);
+            List<Army> team2 = checkArmy(node.getArmies(), 2);
+            if (team1.isEmpty() || team2.isEmpty()) {
+                continue;
+            }
+            for (Army army1 : team1) {
+                int health1 = army1.getNumUnits() * army1.getUnits().get(0).getHealth();
+                int damage1 = army1.getNumUnits() * army1.getUnits().get(0).getDamage();
+                for (Army army2 : team2) {
+                    int health2 = army2.getNumUnits() * army2.getUnits().get(0).getHealth();
+                    int damage2 = army2.getNumUnits() * army2.getUnits().get(0).getDamage();
+                    while (health1 > 0 && health2 > 0) {
+                        health1 -= damage2;
+                        if (health1 <= 0) {
+                            graph.removeArmyNode(army1, node);
+                        }
+                        health2 -= damage1;
+                    }
+                    if (health2 <= 0) {
+                        graph.removeArmyNode(army2, node);
+                    }
+                }
+            }
+        }
+        for (Edge edge : graph.getEdges()) {
+            List<Army> team1 = checkArmy(edge.getArmies(), 1);
+            List<Army> team2 = checkArmy(edge.getArmies(), 2);
+            if (team1.isEmpty() || team2.isEmpty()) {
+                continue;
+            }
+            for (Army army1 : team1) {
+                int health1 = army1.getNumUnits() * army1.getUnits().get(0).getHealth();
+                int damage1 = army1.getNumUnits() * army1.getUnits().get(0).getDamage();
+                for (Army army2 : team2) {
+                    int health2 = army2.getNumUnits() * army2.getUnits().get(0).getHealth();
+                    int damage2 = army2.getNumUnits() * army2.getUnits().get(0).getDamage();
+                    while (health1 > 0 && health2 > 0) {
+                        health1 -= damage2;
+                        if (health1 <= 0) {
+                            graph.removeArmyEdge(army1, edge);
+                        }
+                        health2 -= damage1;
+                    }
+                    if (health2 <= 0) {
+                        graph.removeArmyEdge(army2, edge);
+                    }
+                }
             }
         }
     }

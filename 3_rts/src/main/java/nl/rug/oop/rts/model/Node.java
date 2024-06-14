@@ -2,6 +2,7 @@ package nl.rug.oop.rts.model;
 
 import lombok.*;
 import nl.rug.oop.rts.armies.Army;
+import nl.rug.oop.rts.simulation.events.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Node {
     private String name;
     private List<Edge> edges;
     private List<Army> armies;
+    private List<Event> events;
 
     /**
      * New node.
@@ -34,6 +36,7 @@ public class Node {
     public Node(int id, int x, int y, String name) {
         edges = new ArrayList<>();
         armies = new ArrayList<>();
+        events = new ArrayList<>();
         this.id = id;
         this.x = x;
         this.y = y;

@@ -22,8 +22,6 @@ public class RemoveArmyListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*JOptionPane options = new JOptionPane("Choose a faction");
-        options.setOptions(Faction.values());*/
         Faction[] factions = new Faction[graph.getCurrent().getArmies().size()];
         for (int i = 0; i < graph.getCurrent().getArmies().size(); i++) {
             factions[i] = graph.getCurrent().getArmies().get(i).getFaction();

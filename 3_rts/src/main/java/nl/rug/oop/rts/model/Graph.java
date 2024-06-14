@@ -6,6 +6,7 @@ import lombok.*;
 import nl.rug.oop.rts.armies.Army;
 import nl.rug.oop.rts.observer.MapObservable;
 import nl.rug.oop.rts.observer.MapObserver;
+import nl.rug.oop.rts.simulation.events.Event;
 
 /**
  * Class that keeps track of all the nodes and edges.
@@ -137,6 +138,26 @@ public class Graph implements MapObservable {
      */
     public void removeArmyEdge(Army army, Edge edge) {
         edge.getArmies().remove(army);
+        notifyObservers();
+    }
+
+    public void addEventEdge(Event event, Edge edge) {
+        edge.getEvents().add(event);
+        notifyObservers();
+    }
+
+    public void removeEventEdge(Event event, Edge edge) {
+        edge.getEvents().remove(event);
+        notifyObservers();
+    }
+
+    public void addEventNode(Event event, Node node) {
+        node.getEvents().add(event);
+        notifyObservers();
+    }
+
+    public void removeEventNode(Event event, Node node) {
+        node.getEvents().remove(event);
         notifyObservers();
     }
 

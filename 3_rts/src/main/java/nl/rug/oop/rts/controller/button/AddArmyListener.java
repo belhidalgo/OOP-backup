@@ -22,12 +22,13 @@ public class AddArmyListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*JOptionPane options = new JOptionPane("Choose a faction");
-        options.setOptions(Faction.values());*/
-
         Object selection = JOptionPane.showInputDialog(null, "Choose a faction", "Input",
                 JOptionPane.INFORMATION_MESSAGE, null, Faction.values(), null);
-        Army army = new Army((Faction) selection);
-        graph.addArmyNode(army, graph.getCurrent());
+        try {
+            Army army = new Army((Faction) selection);
+            graph.addArmyNode(army, graph.getCurrent());
+        } catch (ClassCastException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
