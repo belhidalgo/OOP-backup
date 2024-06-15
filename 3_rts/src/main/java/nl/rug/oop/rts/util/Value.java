@@ -20,7 +20,7 @@ public enum Value {
     PANELSTRINGX(10),
     PANELSTRINGY(20),
     COLUMNSTEXTFIELD(15),
-    ROWSLAYOUT(3),
+    ROWSLAYOUT(5),
     COLSLAYOUT(1);
 
     private int num;

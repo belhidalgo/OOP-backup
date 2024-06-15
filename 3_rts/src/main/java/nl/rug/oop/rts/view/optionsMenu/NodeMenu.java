@@ -6,6 +6,7 @@ import nl.rug.oop.rts.controller.button.RemoveArmyListener;
 import nl.rug.oop.rts.controller.button.RemoveEventListener;
 import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Node;
+import nl.rug.oop.rts.util.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,7 @@ public class NodeMenu extends OptionMenu {
     private JTextField nameField;
     private JButton addArmy;
     private JButton removeArmy;
+    private JButton removeEvent;
 
     /**
      * New EdgeMenu.
@@ -26,7 +28,7 @@ public class NodeMenu extends OptionMenu {
         super(graph);
         this.nameField = createTextField(graph.getCurrent().getName());
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 1, 10, 10));
+        panel.setLayout(new GridLayout(Value.ROWSLAYOUT.getValue(), Value.COLSLAYOUT.getValue(), 10, 10));
         panel.add(nameField);
 
         addArmy = new JButton("Add Army");
@@ -44,10 +46,12 @@ public class NodeMenu extends OptionMenu {
         addEvent.addActionListener(new AddEventListener(graph));
         panel.add(addEvent);
 
-        JButton removeEvent = new JButton("Remove Event");
+        removeEvent = new JButton("Remove Event");
         removeEvent.addActionListener(new RemoveEventListener(graph));
+        if (graph.getCurrent() != null && graph.getCurrent().getEvents().isEmpty()) {
+            removeEvent.setEnabled(false);
+        }
         panel.add(removeEvent);
-
         add(panel);
     }
 
@@ -59,5 +63,6 @@ public class NodeMenu extends OptionMenu {
         Node current = getGraph().getCurrent();
         nameField.setText(current.getName());
         removeArmy.setEnabled(!getGraph().getCurrent().getArmies().isEmpty());
+        removeEvent.setEnabled(!getGraph().getCurrent().getEvents().isEmpty());
     }
 }

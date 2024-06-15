@@ -9,7 +9,6 @@ import lombok.*;
 import nl.rug.oop.rts.simulation.Simulation;
 
 import javax.swing.*;
-import java.util.Timer;
 
 /**
  * Action Listener for the Simulation Step button.
@@ -21,24 +20,23 @@ public class TimeStepListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Simulation simulation = new Simulation(graph);
-        for (int i = 0; i < 2; i++) {
-            simulation.battle();
-            graph.notifyObservers();
+        new Thread(()-> {
+            Simulation simulation = new Simulation(graph);
+            for (int i = 0; i < 2; i++) {
+                simulation.battle();
+                sleepThread();
+                SwingUtilities.invokeLater(simulation::step);
+                sleepThread();
+            }
+            SwingUtilities.invokeLater(simulation::battle);
+        }).start();
+    }
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
-            simulation.step();
-            graph.notifyObservers();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
+    private void sleepThread() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        simulation.battle();
     }
 }

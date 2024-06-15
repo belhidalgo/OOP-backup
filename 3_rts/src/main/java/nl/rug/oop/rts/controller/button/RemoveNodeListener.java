@@ -12,7 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 public class RemoveNodeListener implements ActionListener {
     private Graph graph;
-    //JButton button;
 
     /**
      * Execution of the Remove Node button.

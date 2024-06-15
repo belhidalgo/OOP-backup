@@ -20,7 +20,6 @@ public class RemoveEdgeListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (graph.getCurrentEdge() != null) {
             graph.setAddEdge(false);
-            //button.setEnabled(true);
             graph.removeEdge(graph.getCurrentEdge());
         }
     }

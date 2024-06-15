@@ -1,14 +1,15 @@
 package nl.rug.oop.rts.simulation.events;
 
-import lombok.*;
 import nl.rug.oop.rts.armies.Army;
 import nl.rug.oop.rts.model.Graph;
 
+/**
+ * SuperPower event (the army has its damage level increased by 2).
+ */
 public class SuperPower extends Event {
 
     public SuperPower(Graph graph) {
-        super(graph);
-        setPossibleEvents(PossibleEvents.SUPERPOWER);
+        super(graph, PossibleEvents.SUPERPOWER);
     }
 
     @Override

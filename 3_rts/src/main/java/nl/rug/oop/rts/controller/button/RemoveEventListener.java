@@ -1,7 +1,5 @@
 package nl.rug.oop.rts.controller.button;
 
-import nl.rug.oop.rts.armies.Army;
-import nl.rug.oop.rts.armies.Faction;
 import nl.rug.oop.rts.model.Graph;
 
 import java.awt.event.ActionEvent;
@@ -12,13 +10,17 @@ import nl.rug.oop.rts.simulation.events.PossibleEvents;
 
 import javax.swing.*;
 
+/**
+ * Action Listener for the Remove Event button.
+ */
+
 @AllArgsConstructor
 public class RemoveEventListener implements ActionListener {
     private Graph graph;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Boolean isNode;
+        boolean isNode;
         PossibleEvents[] possibleEvents;
         if (graph.getCurrent()!= null) {
             isNode = true;
@@ -46,7 +48,7 @@ public class RemoveEventListener implements ActionListener {
                 }
             }
         } else {
-            for (Event event : graph.getCurrent().getEvents()) {
+            for (Event event : graph.getCurrentEdge().getEvents()) {
                 if (event.getPossibleEvents() == (PossibleEvents) selection) {
                     graph.removeEventEdge(event, graph.getCurrentEdge());
                     break;

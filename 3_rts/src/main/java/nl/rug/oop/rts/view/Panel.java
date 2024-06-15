@@ -121,7 +121,14 @@ public class Panel extends JPanel implements MapObserver {
             int y = (edge.getNode1().getY() + edge.getNode2().getY() + 90) / 2 - 20;
             for (Army army : edge.getArmies()) {
                 Image image = chooseFaction(army.getFaction());
-                g.drawImage(image, x, y, null);
+                switch (army.getTeam()) {
+                    case 1 -> {
+                        g.drawImage(image, x, y, null);
+                    }
+                    case 2 -> {
+                        g.drawImage(image, x + 40, y + 40, null);
+                    }
+                }
             }
         }
     }
