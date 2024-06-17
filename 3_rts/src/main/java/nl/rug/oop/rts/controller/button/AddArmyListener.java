@@ -24,11 +24,12 @@ public class AddArmyListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object selection = JOptionPane.showInputDialog(null, "Choose a faction", "Input",
                 JOptionPane.INFORMATION_MESSAGE, null, Faction.values(), null);
-        try {
+        if (selection != null) {
             Army army = new Army((Faction) selection);
             graph.addArmyNode(army, graph.getCurrent());
-        } catch (ClassCastException ex) {
-            throw new RuntimeException(ex);
+        } else {
+            JOptionPane.showMessageDialog(null,"Please choose a faction", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        //TODO: decide if this is better with the error message
     }
 }

@@ -28,10 +28,12 @@ public class RemoveArmyListener implements ActionListener {
         }
         Object selection = JOptionPane.showInputDialog(null, "Choose a faction", "Input",
                 JOptionPane.INFORMATION_MESSAGE, null, factions, null);
-        for (Army army : graph.getCurrent().getArmies()) {
-            if (army.getFaction() == (Faction) selection) {
-                graph.removeArmyNode(army, graph.getCurrent());
-                break;
+        if (selection != null) {
+            for (Army army : graph.getCurrent().getArmies()) {
+                if (army.getFaction() == (Faction) selection) {
+                    graph.removeArmyNode(army, graph.getCurrent());
+                    break;
+                }
             }
         }
     }

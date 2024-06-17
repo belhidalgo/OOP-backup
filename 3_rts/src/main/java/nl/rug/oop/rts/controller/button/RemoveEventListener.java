@@ -25,35 +25,38 @@ public class RemoveEventListener implements ActionListener {
         if (graph.getCurrent()!= null) {
             isNode = true;
             possibleEvents = new PossibleEvents[graph.getCurrent().getEvents().size()];
-        } else {
-            isNode = false;
-            possibleEvents = new PossibleEvents[graph.getCurrentEdge().getEvents().size()];
-        }
-        if (isNode) {
             for (int i = 0; i < graph.getCurrent().getEvents().size(); i++) {
                 possibleEvents[i] = graph.getCurrent().getEvents().get(i).getPossibleEvents();
             }
+            Object selection = select(possibleEvents);
+            if (selection != null) {
+                for (Event event : graph.getCurrent().getEvents()) {
+                    if (event.getPossibleEvents() == (PossibleEvents) selection) {
+                        graph.removeEventNode(event, graph.getCurrent());
+                        break;
+                    }
+                }
+            }
+
         } else {
+            possibleEvents = new PossibleEvents[graph.getCurrentEdge().getEvents().size()];
             for (int i = 0; i < graph.getCurrentEdge().getEvents().size(); i++) {
                 possibleEvents[i] = graph.getCurrentEdge().getEvents().get(i).getPossibleEvents();
             }
+            Object selection = select(possibleEvents);
+            if (selection != null) {
+                for (Event event : graph.getCurrentEdge().getEvents()) {
+                    if (event.getPossibleEvents() == (PossibleEvents) selection) {
+                        graph.removeEventEdge(event, graph.getCurrentEdge());
+                        break;
+                    }
+                }
+            }
         }
-        Object selection = JOptionPane.showInputDialog(null, "Choose a faction", "Input",
+    }
+
+    private Object select(PossibleEvents[] possibleEvents) {
+        return JOptionPane.showInputDialog(null, "Choose a faction", "Input",
                 JOptionPane.INFORMATION_MESSAGE, null, possibleEvents, null);
-        if (isNode) {
-            for (Event event : graph.getCurrent().getEvents()) {
-                if (event.getPossibleEvents() == (PossibleEvents) selection) {
-                    graph.removeEventNode(event, graph.getCurrent());
-                    break;
-                }
-            }
-        } else {
-            for (Event event : graph.getCurrentEdge().getEvents()) {
-                if (event.getPossibleEvents() == (PossibleEvents) selection) {
-                    graph.removeEventEdge(event, graph.getCurrentEdge());
-                    break;
-                }
-            }
-        }
     }
 }

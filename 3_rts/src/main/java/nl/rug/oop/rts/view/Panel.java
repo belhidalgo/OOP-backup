@@ -84,11 +84,13 @@ public class Panel extends JPanel implements MapObserver {
             if (node == graph.getCurrent()) {
                 image = TextureLoader.getInstance().getTexture("node3", Value.SELECTEDNODESIZE.getValue(),
                         Value.SELECTEDNODESIZE.getValue());
+                g.drawImage(image, node.getX() - 3, node.getY() - 3, null);
             } else {
                 image = TextureLoader.getInstance().getTexture("node4", Value.NODESIZE.getValue(),
                         Value.NODESIZE.getValue());
+                g.drawImage(image, node.getX(), node.getY(), null);
             }
-            g.drawImage(image, node.getX(), node.getY(), null);
+            //g.drawImage(image, node.getX(), node.getY(), null);
             Font font = new Font("Serif", Font.BOLD | Font.ITALIC, Value.FONTSIZE.getValue());
             g.setFont(font);
             int width = g.getFontMetrics().stringWidth(node.getName());
@@ -98,15 +100,24 @@ public class Panel extends JPanel implements MapObserver {
     }
 
     private void drawArmyNode(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(Value.STROKEWIDTH.getValue(),
+                BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
         for (Node node : graph.getNodes()) {
             int pos1 = 0;
             int pos2 = 0;
             for (Army army : node.getArmies()) {
                 Image image = chooseFaction(army.getFaction());
                 if (army.getTeam() == 1) {
+                    g2.setColor(Color.RED);
+                    g2.drawRect(node.getX() - 46 + pos1, node.getY() - 14,
+                            Value.ARMYSIZE.getValue() + 2, Value.ARMYSIZE.getValue() + 2);
                     g.drawImage(image, node.getX() - 45 + pos1, node.getY() - 13, null);
                     pos1 = pos1 + 12;
                 } else {
+                    g2.setColor(Color.BLUE);
+                    g2.drawRect(node.getX() - 46 + pos2, node.getY() + 86,
+                            Value.ARMYSIZE.getValue() + 2, Value.ARMYSIZE.getValue() + 2);
                     g.drawImage(image, node.getX() - 45 + pos2, node.getY() + 87, null);
                     pos2 = pos2 + 12;
                 }
@@ -116,6 +127,9 @@ public class Panel extends JPanel implements MapObserver {
     }
 
     private void drawArmyEdge(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(Value.STROKEWIDTH.getValue(),
+                BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
         for (Edge edge : graph.getEdges()) {
             int x = (edge.getNode1().getX() + edge.getNode2().getX() + 90) / 2 - 20;
             int y = (edge.getNode1().getY() + edge.getNode2().getY() + 90) / 2 - 20;
@@ -123,9 +137,13 @@ public class Panel extends JPanel implements MapObserver {
                 Image image = chooseFaction(army.getFaction());
                 switch (army.getTeam()) {
                     case 1 -> {
+                        g2.setColor(Color.RED);
+                        g2.drawRect(x - 1, y - 1, Value.ARMYSIZE.getValue() + 2, Value.ARMYSIZE.getValue() + 2);
                         g.drawImage(image, x, y, null);
                     }
                     case 2 -> {
+                        g2.setColor(Color.BLUE);
+                        g2.drawRect(x + 39, y + 39, Value.ARMYSIZE.getValue() + 2, Value.ARMYSIZE.getValue() + 2);
                         g.drawImage(image, x + 40, y + 40, null);
                     }
                 }

@@ -77,6 +77,7 @@ public class MouseControl extends MouseAdapter {
             graph.notifyObservers();
         }
     }
+    //TODO: solve clicking and then dragging
 
     @Override
     public void mouseReleased(MouseEvent e) {

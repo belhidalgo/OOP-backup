@@ -13,7 +13,6 @@ import javax.swing.*;
 /**
  * Action Listener for the Simulation Step button.
  */
-
 @AllArgsConstructor
 public class TimeStepListener implements ActionListener {
     private Graph graph;
@@ -25,10 +24,10 @@ public class TimeStepListener implements ActionListener {
             for (int i = 0; i < 2; i++) {
                 simulation.battle();
                 sleepThread();
-                SwingUtilities.invokeLater(simulation::step);
+                simulation.step();
                 sleepThread();
             }
-            SwingUtilities.invokeLater(simulation::battle);
+            simulation.battle();
         }).start();
     }
 

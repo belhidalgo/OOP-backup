@@ -15,6 +15,7 @@ public class Menu extends JMenuBar implements MapObserver {
     private JButton addEdge;
     private JButton removeNode;
     private JButton removeEdge;
+    private  JButton saveGame;
 
     /**
      * Create a new menu based on a graph.
@@ -45,6 +46,10 @@ public class Menu extends JMenuBar implements MapObserver {
         JButton timeStep = new JButton("Simulation Step");
         timeStep.addActionListener(new TimeStepListener(graph));
         add(timeStep);
+
+        saveGame = new JButton("Save Game");
+        saveGame.addActionListener(new SaveGameListener(graph));
+        add(saveGame);
     }
 
     @Override

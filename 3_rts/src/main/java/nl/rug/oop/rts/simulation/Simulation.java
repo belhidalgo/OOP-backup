@@ -1,12 +1,14 @@
 package nl.rug.oop.rts.simulation;
 
 import nl.rug.oop.rts.armies.Army;
+import nl.rug.oop.rts.armies.Faction;
 import nl.rug.oop.rts.model.Edge;
 import nl.rug.oop.rts.model.Graph;
 import lombok.*;
 import nl.rug.oop.rts.model.Node;
 import nl.rug.oop.rts.simulation.events.Event;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -68,8 +70,36 @@ public class Simulation {
 
     private void triggerEvent(List<Event> events, Army army, Random random) {
         if (!events.isEmpty() && random.nextBoolean()) {
-            events.get(random.nextInt(0, events.size())).occur(army);
+            Faction faction = army.getFaction();
+            Event event = events.get(random.nextInt(0, events.size()));
+            event.occur(army);
+            String message = chooseMessage(faction, event);
+            JOptionPane.showMessageDialog(new JPanel(), message);
         }
+    }
+
+    private String chooseMessage(Faction faction, Event event) {
+        String message = null;
+        switch (event.getPossibleEvents()) {
+            case REINFORCEMENT -> {
+                message = "A REINFORCEMENT event is happening - An army of "+ faction.name()
+                        + " is reinforced with 5 units.";
+            }
+            case SUPERPOWER -> {
+                message = "A SUPERPOWER event is happening - An army of " + faction.name()
+                        + " has its damage level increased by 2.";
+
+            }
+            case REBELLION -> {
+                message = "A REBELLION event is happening - An army of "
+                        + faction.name() + " decides to switch teams.";
+            }
+            case DISASTER -> {
+                message = "A DISASTER event is happening - A unit of an army of "
+                        + faction.name() + " has been killed by a tornado.";
+            }
+        }
+        return message;
     }
 
     private List<Army> checkArmy(List<Army> armies, int chosenTeam) {

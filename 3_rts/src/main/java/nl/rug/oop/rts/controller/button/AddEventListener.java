@@ -26,12 +26,15 @@ public class AddEventListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object selection = JOptionPane.showInputDialog(null, "Choose an Event", "Input",
                 JOptionPane.INFORMATION_MESSAGE, null, PossibleEvents.values(), null);
-        Event event = getEvent((PossibleEvents) selection);
-        if (graph.getCurrent() != null) {
-            graph.addEventNode(event, graph.getCurrent());
-        } else if (graph.getCurrentEdge() != null){
-            graph.addEventEdge(event, graph.getCurrentEdge());
+        if (selection != null) {
+            Event event = getEvent((PossibleEvents) selection);
+            if (graph.getCurrent() != null) {
+                graph.addEventNode(event, graph.getCurrent());
+            } else if (graph.getCurrentEdge() != null){
+                graph.addEventEdge(event, graph.getCurrentEdge());
+            }
         }
+
     }
 
     private Event getEvent(PossibleEvents selection) {
