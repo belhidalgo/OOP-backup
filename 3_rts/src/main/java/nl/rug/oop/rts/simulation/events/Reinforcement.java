@@ -19,7 +19,7 @@ public class Reinforcement extends Event {
     @Override
     public void occur(Army army) {
         Random random = new Random();
-        for (int i = army.getUnits().size(); i < army.getUnits().size() + 5; i++) {
+        for (int i = 0; i < 5; i++) {
             Unit unit = new Unit(army.getFaction().getUnitNames().get(random.nextInt(Value.START.getValue(), 3)),
                     army.getFaction());
             army.getUnits().add(unit);

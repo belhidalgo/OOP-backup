@@ -50,6 +50,10 @@ public class Menu extends JMenuBar implements MapObserver {
         saveGame = new JButton("Save Game");
         saveGame.addActionListener(new SaveGameListener(graph));
         add(saveGame);
+
+        JButton loadGame = new JButton("Load Game");
+        loadGame.addActionListener(new LoadGameListener(graph));
+        add(loadGame);
     }
 
     @Override

@@ -21,7 +21,6 @@ public class Graph implements MapObservable {
     private List<MapObserver> observers;
     private Node current;
     private Edge currentEdge;
-    private int nodeId;
     private boolean addEdge;
 
     /**

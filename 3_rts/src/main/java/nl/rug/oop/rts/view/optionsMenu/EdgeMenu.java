@@ -20,6 +20,7 @@ public class EdgeMenu extends OptionMenu {
     private JTextField node1Field;
     private JTextField node2Field;
     private JButton removeEvent;
+    private JButton addEvent;
 
     /**
      * New EdgeMenu.
@@ -38,7 +39,7 @@ public class EdgeMenu extends OptionMenu {
         panel.add(node1Field);
         panel.add(node2Field);
 
-        JButton addEvent = new JButton("Add Event");
+        addEvent = new JButton("Add Event");
         addEvent.addActionListener(new AddEventListener(graph));
         panel.add(addEvent);
 

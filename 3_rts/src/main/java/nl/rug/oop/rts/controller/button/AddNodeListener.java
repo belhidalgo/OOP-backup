@@ -6,6 +6,9 @@ import nl.rug.oop.rts.model.Node;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.*;
 import nl.rug.oop.rts.util.Value;
 
@@ -24,13 +27,24 @@ public class AddNodeListener implements ActionListener {
         String input = JOptionPane.showInputDialog(null, "Enter city name: ");
         graph.setAddEdge(false);
         if (input != null && !input.isEmpty()) {
-            Node city = new Node(graph.getNodeId() + 1, Value.STARTNEWNODE.getValue(),
+            Node city = new Node(searchId(), Value.STARTNEWNODE.getValue(),
                     Value.STARTNEWNODE.getValue(), input);
-            graph.setNodeId(graph.getNodeId() + 1);
             graph.addNode(city);
         } else if (input != null) {
             JOptionPane.showMessageDialog(null, "Please enter a valid city name.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private int searchId() {
+        int i = 0;
+        List<Integer> ids = new ArrayList<>();
+        for (Node node : graph.getNodes()) {
+            ids.add(node.getId());
+        }
+        while (ids.contains(i)) {
+            i++;
+        }
+        return i;
     }
 }

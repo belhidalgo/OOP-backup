@@ -25,6 +25,20 @@ public class Army {
     private Edge edge;
 
     /**
+     * New army.
+     * @param faction - the faction the army belongs to.
+     * @param numUnits - the number of units the army has.
+     * @param units - a list of the units the army has.
+     * @param team - the team the army belongs to.
+     */
+    public Army(Faction faction, int numUnits, List<Unit> units, int team) {
+        this.faction = faction;
+        this.numUnits = numUnits;
+        this.units = units;
+        this.team = team;
+    }
+
+    /**
      * Create a new army.
      * @param faction - the faction the army belongs to.
      */
