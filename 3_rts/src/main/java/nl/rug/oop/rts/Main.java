@@ -6,7 +6,7 @@ import nl.rug.oop.rts.util.Initialization;
 /**
  * Main class of the application. Add more details here.
  */
-public class Main {
+public class  Main {
 
     /**
      * Main function. Add more details here.

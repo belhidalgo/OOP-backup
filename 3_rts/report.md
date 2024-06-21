@@ -36,7 +36,14 @@ Please answer the following questions:
 
 ___
 
-Answer:
+Answer: The Model component in the MVC is responsible for representing the data and the business logic of the programme. It manages the data, processes the business rules and responds to requests for information from the other components of the model.
+In this assignment, the Model component was the Graph class as it holds all relevant data about the graph and is responsible for carrying out methods that change the status of the graph.
+
+The View component is responsible for displaying the data received from the Model to the user and sends user input to the Controller. In this case, 
+
+The controller 
+
+In the MCV pattern, it is crucial that the model and the view have loose to no coupling. The model should have no knowledge of the view 
 
 ___
 
@@ -54,7 +61,7 @@ Please provide an example from the assignment on how the Observer pattern suppor
 
 ___
 
-Answer:
+Answer: 
 
 ___
 
