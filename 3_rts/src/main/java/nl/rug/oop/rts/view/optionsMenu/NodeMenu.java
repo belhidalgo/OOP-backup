@@ -28,7 +28,8 @@ public class NodeMenu extends OptionMenu {
         super(graph);
         this.nameField = createTextField(graph.getCurrent().getName());
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(Value.ROWSLAYOUT.getValue(), Value.COLSLAYOUT.getValue(), 10, 10));
+        panel.setLayout(new GridLayout(Value.ROWSLAYOUT.getValue(), Value.COLSLAYOUT.getValue(),
+                Value.HGAP.getValue(), Value.HGAP.getValue()));
         panel.add(nameField);
 
         addArmy = new JButton("Add Army");

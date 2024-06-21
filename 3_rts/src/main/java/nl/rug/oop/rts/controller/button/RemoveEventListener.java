@@ -37,7 +37,6 @@ public class RemoveEventListener implements ActionListener {
                     }
                 }
             }
-
         } else {
             possibleEvents = new PossibleEvents[graph.getCurrentEdge().getEvents().size()];
             for (int i = 0; i < graph.getCurrentEdge().getEvents().size(); i++) {

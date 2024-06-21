@@ -20,8 +20,3 @@ public abstract class Event {
 
     public abstract void occur(Army army);
 }
-/*
-TODO
-29. Make sure that the user is somehow aware of what event has happened (and to which army).
-You can do this by drawing some fancy stuff or using a simple popup message.
- */

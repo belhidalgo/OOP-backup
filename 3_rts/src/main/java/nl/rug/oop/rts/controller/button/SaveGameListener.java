@@ -29,7 +29,6 @@ public class SaveGameListener implements ActionListener {
             }
             GraphStateSave currentGraph = new GraphStateSave(graph);
             currentGraph.saveSimulationState(selectedFile.getAbsolutePath());
-            //simulation.saveSimulationState(graph, selectedFile.getAbsolutePath());
         }
     }
 }

@@ -15,7 +15,6 @@ import java.io.IOException;
 import nl.rug.oop.rts.simulation.events.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -68,7 +67,6 @@ public class GraphStateLoad {
             json.append(line).append("\n");
         }
         String jsonString = json.toString().stripIndent();
-        System.out.println(jsonString);
         String nodesString = getArray(jsonString, "Nodes");
         String edgesString = getArray(jsonString, "Edges");
 
@@ -90,11 +88,9 @@ public class GraphStateLoad {
     }
 
     private List<Node> jsonToNodes(String json) {
-        System.out.println(json);
         List<Node> nodes = new ArrayList<>();
         String[] nodesString = json.split("\n},\n\\{");
         for (String node : nodesString) {
-            System.out.println(node);
             if (node.isEmpty()){
                 continue;
             }
@@ -183,7 +179,6 @@ public class GraphStateLoad {
             return armies;
         }
         String[] armyArray = json.split("\n},\n\\{");
-        System.out.println(Arrays.toString(armyArray));
         for (String army : armyArray) {
             json = json.replace("\n{", "").replace("\n}", "");
             armies.add(jsonToArmy(army));
@@ -263,7 +258,6 @@ public class GraphStateLoad {
     }
 
     private String getArray(String json, String key) {
-        System.out.println(json);
         String search = MARK + key + "\": [";
         int startIdx = json.indexOf(search) + search.length();
         int endIdx = json.indexOf(']', startIdx);

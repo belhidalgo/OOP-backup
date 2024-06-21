@@ -30,7 +30,6 @@ public class GraphStateSave {
     public void saveSimulationState(String filename) {
         try {
             String json = graphToJson(graph);
-            System.out.println(json);
             try (FileWriter fw = new FileWriter(filename)) {
                 fw.write(json);
             }

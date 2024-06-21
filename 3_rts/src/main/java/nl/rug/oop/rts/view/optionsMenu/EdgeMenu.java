@@ -34,7 +34,8 @@ public class EdgeMenu extends OptionMenu {
         node1Field.setEditable(false);
         node2Field.setEditable(false);
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(Value.ROWSLAYOUT.getValue(), Value.COLSLAYOUT.getValue(), 10, 10));
+        panel.setLayout(new GridLayout(Value.ROWSLAYOUT.getValue(),
+                Value.COLSLAYOUT.getValue(), Value.HGAP.getValue(), Value.HGAP.getValue()));
         panel.add(nameField);
         panel.add(node1Field);
         panel.add(node2Field);

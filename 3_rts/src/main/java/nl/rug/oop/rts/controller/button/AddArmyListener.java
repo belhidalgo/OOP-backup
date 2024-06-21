@@ -27,9 +27,6 @@ public class AddArmyListener implements ActionListener {
         if (selection != null) {
             Army army = new Army((Faction) selection);
             graph.addArmyNode(army, graph.getCurrent());
-        } else {
-            JOptionPane.showMessageDialog(null,"Please choose a faction", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        //TODO: decide if this is better with the error message
     }
 }

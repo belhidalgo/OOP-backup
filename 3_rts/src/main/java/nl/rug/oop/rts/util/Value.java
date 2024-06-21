@@ -21,7 +21,8 @@ public enum Value {
     PANELSTRINGY(20),
     COLUMNSTEXTFIELD(15),
     ROWSLAYOUT(5),
-    COLSLAYOUT(1);
+    COLSLAYOUT(1),
+    HGAP(10);
 
     private int num;
 
